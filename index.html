@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- STYLES -->
+        <style type="text/css">
+            .rightButtons {
+                text-align: right;
+            }
+        </style>
+
+        <!-- STYLES -->
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- vvvvvv ionic CDN links -->
+        <script
+            type="module"
+            src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"
+        ></script>
+        <script
+            nomodule
+            src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"
+        ></script>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
+        />
+        <!-- ^^^^^^^ ionic CDN links -->
+        <title>Budget Planner</title>
+    </head>
+    <body>
+        <!-- <ion-app
+            style="
+                --ion-background-color: rgb(44, 50, 142);
+                --ion-text-color: rgb(185, 220, 58);
+            "
+        > -->
+        <ion-app>
+            <ion-header>
+                <ion-toolbar color="primary">
+                    <ion-title style="font-size: 1.5rem"
+                        >UHCW Telecoms</ion-title
+                    >
+                </ion-toolbar>
+            </ion-header>
+            <!-- HEAD ABOVE, BODY BELOW -->
+            <ion-content>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col size-md="6" offset-md="3">
+                            <ion-card>
+                                <ion-card-header>
+                                    <ion-card-title>
+                                        Find A Phone Number
+                                    </ion-card-title>
+                                </ion-card-header>
+                                <ion-card-content>
+                                    <ion-item>
+                                        <ion-label position="floating"
+                                            >Enter Ward/Dept name or
+                                            number</ion-label
+                                        >
+                                        <ion-input
+                                            type="text"
+                                            id="input-reason"
+                                        ></ion-input>
+                                    </ion-item>
+                                    <!-- <ion-item>
+                                        <ion-label position="floating"
+                                            >Expense Amount</ion-label
+                                        >
+                                        <ion-input
+                                            type="number"
+                                            id="input-amount"
+                                        ></ion-input>
+                                    </ion-item> -->
+                                    <div class="ion-text-right">
+                                        <ion-button
+                                            fill="outline"
+                                            color="danger"
+                                            id="btn-cancel"
+                                            ><ion-icon
+                                                slot="start"
+                                                name="close-outline"
+                                            ></ion-icon
+                                            >Cancel</ion-button
+                                        >
+                                        <ion-button
+                                            color="success"
+                                            id="btn-confirm"
+                                            ><ion-icon
+                                                slot="start"
+                                                name="add-circle-outline"
+                                            ></ion-icon
+                                            >Search</ion-button
+                                        >
+                                    </div>
+                                    <!-- <ion-item>
+                                        <img
+                                            src="https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80"
+                                        />
+                                    </ion-item> -->
+                                </ion-card-content>
+                            </ion-card>
+                            <ion-card>
+                                <ion-card-header>
+                                    <ion-card-title>
+                                        Find A Location
+                                    </ion-card-title>
+                                </ion-card-header>
+                                <ion-card-content>
+                                    <ion-item>
+                                        <ion-label position="floating"
+                                            >Enter Ward/Dept name or room
+                                            number</ion-label
+                                        >
+                                        <ion-input
+                                            type="text"
+                                            id="input-reason"
+                                        ></ion-input>
+                                    </ion-item>
+                                    <!-- <ion-item>
+                                        <ion-label position="floating"
+                                            >Expense Amount</ion-label
+                                        >
+                                        <ion-input
+                                            type="number"
+                                            id="input-amount"
+                                        ></ion-input>
+                                    </ion-item> -->
+                                    <div class="ion-text-right">
+                                        <ion-button
+                                            fill="outline"
+                                            color="danger"
+                                            id="btn-cancel"
+                                            ><ion-icon
+                                                slot="start"
+                                                name="close-outline"
+                                            ></ion-icon
+                                            >Cancel</ion-button
+                                        >
+                                        <ion-button
+                                            color="success"
+                                            id="btn-confirm"
+                                            ><ion-icon
+                                                slot="start"
+                                                name="add-circle-outline"
+                                            ></ion-icon
+                                            >Search</ion-button
+                                        >
+                                    </div>
+                                    <!-- <ion-item>
+                                        <img
+                                            src="https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80"
+                                        />
+                                    </ion-item> -->
+                                </ion-card-content>
+                            </ion-card>
+                            <ion-card>
+                                <ion-card-header>
+                                    <ion-card-title>
+                                        Find A Person (TBD)
+                                    </ion-card-title>
+                                </ion-card-header>
+                                <ion-card-content>
+                                    <ion-item>
+                                        <ion-label position="floating"
+                                            >Enter Name or Position</ion-label
+                                        >
+                                        <ion-input
+                                            type="text"
+                                            id="input-reason"
+                                        ></ion-input>
+                                    </ion-item>
+                                    <!-- <ion-item>
+                                        <ion-label position="floating"
+                                            >Expense Amount</ion-label
+                                        >
+                                        <ion-input
+                                            type="number"
+                                            id="input-amount"
+                                        ></ion-input>
+                                    </ion-item> -->
+                                    <div class="ion-text-right">
+                                        <ion-button
+                                            fill="outline"
+                                            color="danger"
+                                            id="btn-cancel"
+                                            ><ion-icon
+                                                slot="start"
+                                                name="close-outline"
+                                            ></ion-icon
+                                            >Cancel</ion-button
+                                        >
+                                        <ion-button
+                                            color="success"
+                                            id="btn-confirm"
+                                            ><ion-icon
+                                                slot="start"
+                                                name="add-circle-outline"
+                                            ></ion-icon
+                                            >Search</ion-button
+                                        >
+                                    </div>
+                                    <!-- <ion-item>
+                                        <img
+                                            src="https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80"
+                                        />
+                                    </ion-item> -->
+                                </ion-card-content>
+                            </ion-card>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row
+                        ><ion-col size-md="6" offset-md="3" id="expenses-list">
+                            <ion-list></ion-list> </ion-col
+                    ></ion-row>
+                    <ion-col size-md="6" offset-md="3" id="expenses-list">
+                        <p class="ion-margin">
+                            Total Expenses: <span id="total-expenses"></span>
+                        </p>
+                    </ion-col>
+                </ion-grid>
+            </ion-content>
+            <ion-alert-controller></ion-alert-controller>
+        </ion-app>
+        <script src="app.js"></script>
+    </body>
+</html>
