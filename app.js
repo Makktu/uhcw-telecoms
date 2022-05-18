@@ -22,6 +22,7 @@ let totalExpensesNumber = 0;
 
 const clearFields = function () {
     phoneInput.value = "";
+    roomInput.value = "";
     // amountInput.value = "";
 };
 
@@ -45,8 +46,34 @@ phoneConfirmBtn.addEventListener("click", () => {
     }
 });
 
-// cancelBtn.addEventListener("click", () => {
-//     if (amountInput.value || reasonInput.value) {
-//         clearFields();
-//     }
-// });
+roomConfirmBtn.addEventListener("click", () => {
+    if (roomInput.value) {
+        const enteredRoom = roomInput.value;
+        // const enteredAmount = amountInput.value;
+        // const newItem = document.createElement("ion-item");
+        // newItem.textContent += enteredReason + ": £" + enteredAmount;
+        // expensesList.appendChild(newItem);
+        clearFields();
+        showOutcome(enteredRoom);
+        // totalExpensesNumber += +enteredAmount;
+        // totalExpensesDisplay.textContent = `£${totalExpensesNumber}`;
+    } else {
+        alertControl.message = "Enter a search term first";
+        alertControl.header = "No Input";
+        alertControl.buttons = ["OK"];
+        document.body.appendChild(alertControl);
+        alertControl.present();
+    }
+});
+
+phoneCancelBtn.addEventListener("click", () => {
+    if (phoneInput.value) {
+        clearFields();
+    }
+});
+
+roomCancelBtn.addEventListener("click", () => {
+    if (roomInput.value) {
+        clearFields();
+    }
+});
