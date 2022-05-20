@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <script src="require.js"></script>
         <!-- STYLES -->
         <style type="text/css">
             .rightButtons {
@@ -50,6 +51,9 @@
             <!-- HEAD ABOVE, BODY BELOW -->
             <ion-content>
                 <ion-grid>
+                    <!-- <ion-modal is-open="true">
+                        <ion-content>Modal Content</ion-content>
+                    </ion-modal> -->
                     <ion-row>
                         <ion-col size-md="6" offset-md="3">
                             <ion-card>
@@ -163,6 +167,6 @@
             </ion-content>
             <ion-alert-controller></ion-alert-controller>
         </ion-app>
-        <script src="app.js"></script>
+        <script type="module" src="app.js"></script>
     </body>
 </html>

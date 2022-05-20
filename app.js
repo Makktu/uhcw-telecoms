@@ -1,3 +1,22 @@
+"use strict";
+
+// *************************************
+
+// import sqlite3 from "/sqlite3";
+// import { open } from "/sqlite";
+
+import sqlite3 from "sqlite3";
+
+// this is a top-level await
+// (async () => {
+//     // open the database
+//     const db = await open({
+//         filename: "/chinook.db",
+//         driver: sqlite3.Database,
+//     });
+// })();
+// *************************************
+
 function showOutcome(content) {
     alertControl.message = content;
     alertControl.header = "You searched for";
