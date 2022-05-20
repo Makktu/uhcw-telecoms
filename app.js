@@ -2,10 +2,12 @@
 
 // *************************************
 
+// DO ALL THE DATABASE STUFF HERE
+
 // import sqlite3 from "/sqlite3";
 // import { open } from "/sqlite";
 
-import sqlite3 from "sqlite3";
+// import sqlite3 from "sqlite3";
 
 // this is a top-level await
 // (async () => {
