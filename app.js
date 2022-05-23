@@ -2,7 +2,9 @@
 
 // *************************************
 
-// const sqlite3 = require("sqlite3").verbose();
+const initSqlJs = window.initSqlJs;
+
+const db = "./chinook.db";
 
 // const db = new sqlite3.Database(
 //     "./chinook.db",
