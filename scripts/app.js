@@ -2,35 +2,40 @@
 
 // *************************************
 
-const initSqlJs = window.initSqlJs;
-
-const db = "./chinook.db";
-
-// const db = new sqlite3.Database(
-//     "./chinook.db",
-//     sqlite3.OPEN_READWRITE,
-//     (err) => {
-//         if (err) {
-//             return console.error(err.message + "<<<<<<<_________");
-//         } else console.log("ALL OK");
+// function extractTableJSONRecords() {
+//     let stmt = "SELECT * FROM `" + "chinook/albums" + "`";
+//     let resultset = db.exec(stmt);
+//     let columns = resultset[0]["columns"];
+//     let values = resultset[0]["values"];
+//     let jsonOutput = [];
+//     for (let valArr of values) {
+//         let obj = {};
+//         for (let v in valArr) {
+//             obj[columns[v]] = valArr[v];
+//         }
+//         jsonOutput.push(obj);
 //     }
-// );
+//     return jsonOutput;
+// }
 
-// DO ALL THE DATABASE STUFF HERE
+// const initSqlJs = window.initSqlJs;
+// const SQL = await initSqlJs({
+// Required to load the wasm binary asynchronously. Of course, you can host it wherever you want
+// You can omit locateFile completely when running in node
+//     locateFile: (file) => `/node_modules/sql.js/dist/sql-wasm.wasm`,
+// });
+// var uInt8Array = new Uint8Array("/chinook.db");
+// const db = new SQL.Database();
 
-// import sqlite3 from "/sqlite3";
-// import { open } from "/sqlite";
-
-// import sqlite3 from "sqlite3";
-
-// this is a top-level await
-// (async () => {
-//     // open the database
-//     const db = await open({
-//         filename: "/chinook.db",
-//         driver: sqlite3.Database,
-//     });
-// })();
+// let sqlstr =
+//     "CREATE TABLE hello (a int, b char); \
+// INSERT INTO hello VALUES (0, 'hello'); \
+// INSERT INTO hello VALUES (1, 'world');";
+// db.run(sqlstr);
+// console.log(db);
+// const stmt = db.prepare("SELECT * FROM hello WHERE a=:aval AND b=:bval");
+// console.log(stmt);
+// const stmt = db.prepare("SELECT * FROM 'artists'");
 // *************************************
 
 function showOutcome(content) {
