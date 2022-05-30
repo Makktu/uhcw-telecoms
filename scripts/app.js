@@ -2,40 +2,14 @@
 
 // *************************************
 
-// function extractTableJSONRecords() {
-//     let stmt = "SELECT * FROM `" + "chinook/albums" + "`";
-//     let resultset = db.exec(stmt);
-//     let columns = resultset[0]["columns"];
-//     let values = resultset[0]["values"];
-//     let jsonOutput = [];
-//     for (let valArr of values) {
-//         let obj = {};
-//         for (let v in valArr) {
-//             obj[columns[v]] = valArr[v];
-//         }
-//         jsonOutput.push(obj);
-//     }
-//     return jsonOutput;
-// }
+function getResults() {
+    const url =
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQJUFTqYv0rixudrDrh-1lsX7KI7NYaZrKwh13EQhLY7q9Xq4xdGrD-mF6AWOjoQtr1ml-HjPPICNj-/pubhtml?format=json";
+    fetch(url)
+        .then((result) => result.text())
+        .then((jsonText) => document.write(jsonText));
+}
 
-// const initSqlJs = window.initSqlJs;
-// const SQL = await initSqlJs({
-// Required to load the wasm binary asynchronously. Of course, you can host it wherever you want
-// You can omit locateFile completely when running in node
-//     locateFile: (file) => `/node_modules/sql.js/dist/sql-wasm.wasm`,
-// });
-// var uInt8Array = new Uint8Array("/chinook.db");
-// const db = new SQL.Database();
-
-// let sqlstr =
-//     "CREATE TABLE hello (a int, b char); \
-// INSERT INTO hello VALUES (0, 'hello'); \
-// INSERT INTO hello VALUES (1, 'world');";
-// db.run(sqlstr);
-// console.log(db);
-// const stmt = db.prepare("SELECT * FROM hello WHERE a=:aval AND b=:bval");
-// console.log(stmt);
-// const stmt = db.prepare("SELECT * FROM 'artists'");
 // *************************************
 
 function showOutcome(content) {
@@ -75,6 +49,7 @@ phoneConfirmBtn.addEventListener("click", () => {
         // expensesList.appendChild(newItem);
         clearFields();
         showOutcome(enteredPhone);
+        getResults(enteredPhone);
         // totalExpensesNumber += +enteredAmount;
         // totalExpensesDisplay.textContent = `£${totalExpensesNumber}`;
     } else {
