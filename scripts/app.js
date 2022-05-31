@@ -2,12 +2,26 @@
 
 // *************************************
 
-function getResults() {
-    const url =
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQJUFTqYv0rixudrDrh-1lsX7KI7NYaZrKwh13EQhLY7q9Xq4xdGrD-mF6AWOjoQtr1ml-HjPPICNj-/pubhtml?format=json";
-    fetch(url)
-        .then((result) => result.text())
-        .then((jsonText) => document.write(jsonText));
+const theDatabase = fetch(
+    "https://docs.google.com/spreadsheets/d/1pIuk8dvtgyutXFIpqofqwREYlnptFEIxMuJHZak6FIk/gviz/tq?tqx=out:json&tq&gid=0"
+);
+
+function getResults(searchtext) {
+    var spreadsheetId = "1w3AB-skEn07pVyEj_Auqxhqs3dsvemwMkyNfx8i1vQw"; //** CHANGE !!!
+    var dataRange = "A2:F"; //** CHANGE !!!
+    var data = Sheets.Spreadsheets.Values.get(spreadsheetId, dataRange).values;
+    var ar = [];
+
+    data.forEach(function (f) {
+        f.forEach(function (k) {
+            if (k.includes(searchtext)) {
+                ar.push(f);
+                return;
+            }
+        });
+    });
+    console.log(ar);
+    // return ar;
 }
 
 // *************************************
@@ -26,10 +40,6 @@ const phoneConfirmBtn = document.querySelector("#btn-phone-confirm");
 const roomInput = document.querySelector("#input-room");
 const roomCancelBtn = document.querySelector("#btn-room-cancel");
 const roomConfirmBtn = document.querySelector("#btn-room-confirm");
-
-// const amountInput = document.querySelector("#input-amount");
-// const expensesList = document.querySelector("#expenses-list");
-// const totalExpensesDisplay = document.querySelector("#total-expenses");
 const alertControl = document.createElement("ion-alert");
 
 let totalExpensesNumber = 0;
@@ -37,21 +47,14 @@ let totalExpensesNumber = 0;
 const clearFields = function () {
     phoneInput.value = "";
     roomInput.value = "";
-    // amountInput.value = "";
 };
 
 phoneConfirmBtn.addEventListener("click", () => {
     if (phoneInput.value) {
         const enteredPhone = phoneInput.value;
-        // const enteredAmount = amountInput.value;
-        // const newItem = document.createElement("ion-item");
-        // newItem.textContent += enteredReason + ": £" + enteredAmount;
-        // expensesList.appendChild(newItem);
         clearFields();
         showOutcome(enteredPhone);
-        getResults(enteredPhone);
-        // totalExpensesNumber += +enteredAmount;
-        // totalExpensesDisplay.textContent = `£${totalExpensesNumber}`;
+        // getResults(enteredPhone);
     } else {
         alertControl.message = "Enter a search term first";
         alertControl.header = "No Input";
@@ -64,14 +67,9 @@ phoneConfirmBtn.addEventListener("click", () => {
 roomConfirmBtn.addEventListener("click", () => {
     if (roomInput.value) {
         const enteredRoom = roomInput.value;
-        // const enteredAmount = amountInput.value;
-        // const newItem = document.createElement("ion-item");
-        // newItem.textContent += enteredReason + ": £" + enteredAmount;
-        // expensesList.appendChild(newItem);
         clearFields();
         showOutcome(enteredRoom);
-        // totalExpensesNumber += +enteredAmount;
-        // totalExpensesDisplay.textContent = `£${totalExpensesNumber}`;
+        // getResults(enteredRoom);
     } else {
         alertControl.message = "Enter a search term first";
         alertControl.header = "No Input";
