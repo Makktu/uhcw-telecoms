@@ -41,14 +41,14 @@ readTextFile("./switchdesk1.json", function (text) {
 function showOutcome(searchPhrase) {
     resArr = [];
 
-    // msgArea.innerHTML = "";
+    // * catch a few common searches and force them
     searchPhrase = searchPhrase.toUpperCase();
     if (searchPhrase == "X RAY" || searchPhrase == "XRAY") {
         searchPhrase = "X-RAY";
     }
     if (searchPhrase == "LABOR") searchPhrase = "LABOUR";
     if (searchPhrase.includes("CONTROL")) searchPhrase = "ADK20044";
-    console.log(">>>", searchPhrase);
+    // ********************************************
 
     let thisDescription = "";
     let thisRoom = "";
@@ -75,7 +75,8 @@ function showOutcome(searchPhrase) {
             html = `Showing 1st result of ${resArr.length}:<br>${resArr[0]["Room Num"]}<br>${resArr[0]["Description"]}<br>${resArr[0]["Department"]}<br>${resArr[0]["Wing"]}`;
             console.log(html);
         } else if (resArr.length > 1 && showAll) {
-            createAllResults(resArr);
+            // createAllResults(resArr);
+            html = `Show All functionality not done yet...`;
         } else {
             html = `Showing 1 result:<br>${resArr[0]["Room Num"]}<br>${resArr[0]["Description"]}<br>${resArr[0]["Department"]}<br>${resArr[0]["Wing"]}`;
         }
@@ -83,18 +84,24 @@ function showOutcome(searchPhrase) {
     displayBox(html);
 }
 
-function createAllResults(resArr) {
-    html = `<ion-item>All Results:</ion-item><ion-item style="float:right";><ion-button
+/* <ion-item style="float:right";><ion-button
     fill="outline"
     color="danger"
     id="all-results-close"
-    onclick=closeAllResults()
+    onclick="dismissModal()"
     ><ion-icon
         slot="start"
         name="close-outline"
     ></ion-icon
     >CLOSE</ion-button
-></ion-item>`;
+></ion-item> */
+
+function createAllResults(resArr) {
+    html = `<ion-item>All Results:</ion-item><ion-buttons slot="primary">
+    <ion-button id="results-closer" style="opacity:1">
+      <ion-icon slot="icon-only" name="close"></ion-icon>CLOSE WINDOW
+    </ion-button>
+  </ion-buttons>`;
     resArr.forEach((entry) => {
         html += `<br>${resArr[0]["Room Num"]}<br>${resArr[0]["Description"]}<br>${resArr[0]["Department"]}<br>${resArr[0]["Wing"]}<br>`;
     });
@@ -113,7 +120,7 @@ function displayBox(html) {
     alertControl.buttons = [
         {
             text: "SHOW ALL",
-            role: "cancel",
+            // role: "cancel",
             cssClass: "secondary",
             id: "show-all-button",
             handler: () => {
@@ -150,8 +157,6 @@ const roomConfirmBtn = document.querySelector("#btn-room-confirm");
 const alertControl = document.createElement("ion-alert");
 const modalControl = document.querySelector("#control-modal");
 
-let totalExpensesNumber = 0;
-
 const clearFields = function () {
     phoneInput.value = "";
     roomInput.value = "";
@@ -178,7 +183,6 @@ roomConfirmBtn.addEventListener("click", () => {
         searchPhrase = roomInput.value;
         clearFields();
         showOutcome(searchPhrase);
-        // getResults(enteredRoom);
     } else {
         alertControl.message = "Enter a search term first";
         alertControl.header = "No Input";
@@ -199,21 +203,3 @@ roomCancelBtn.addEventListener("click", () => {
         clearFields();
     }
 });
-
-// ************************
-
-// if (thisDepartment?.includes(searchPhrase)) {
-//     resArr.push(entry);
-// }
-
-// if (typeof thisDepartment == "object") {
-//     entry["Department"].forEach((place) => {
-//         if (place.includes(searchPhrase)) {
-//             resArr.push(entry);
-//         }
-//     });
-// } else {
-//     if (entry["Department"].includes(searchPhrase)) {
-//         resArr.push(entry);
-//     }
-// }
