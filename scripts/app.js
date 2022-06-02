@@ -93,9 +93,10 @@ const clearFields = function () {
 
 phoneConfirmBtn.addEventListener("click", () => {
     if (phoneInput.value) {
-        const enteredPhone = phoneInput.value;
+        searchPhrase = phoneInput.value;
         clearFields();
-        showOutcome(enteredPhone);
+        displayBox("This part's not working yet. Coming soon...");
+        // showOutcome(enteredPhone);
         // getResults(enteredPhone);
     } else {
         alertControl.message = "Enter a search term first";
