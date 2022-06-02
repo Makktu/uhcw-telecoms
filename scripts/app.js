@@ -26,10 +26,20 @@ readTextFile("./switchdesk1.json", function (text) {
 
 // *************************************
 
+function parseSearch(searchPhrase) {
+    if (searchPhrase == "X RAY" || searchPhrase == "XRAY") {
+        searchPhrase = "X-RAY";
+    }
+    if (searchPhrase == "LABOR") searchPhrase = "LABOUR";
+}
+
 function showOutcome(searchPhrase) {
     resArr = [];
+
     // msgArea.innerHTML = "";
     searchPhrase = searchPhrase.toUpperCase();
+    parseSearch(searchPhrase);
+
     let thisDescription = "";
     let thisRoom = "";
     let thisDepartment = "";
@@ -51,20 +61,47 @@ function showOutcome(searchPhrase) {
     if (resArr.length == 0) {
         html = `Nothing found for '${searchPhrase}'`;
     } else {
-        if (resArr.length > 1) {
-            html = `Showing 1st result of ${resArr.length}:<br>${resArr[0]["Room Num"]}<br>${resArr[0]["Department"]}<br>${resArr[0]["Wing"]}<br>[Tap ALL To Show All (not working yet)]`;
+        if (resArr.length > 1 && !showAll) {
+            html = `Showing 1st result of ${resArr.length}:<br>${resArr[0]["Room Num"]}<br>${resArr[0]["Department"]}<br>${resArr[0]["Wing"]}`;
             console.log(html);
         } else {
             html = `Showing 1 result:<br>${resArr[0]["Room Num"]}<br>${resArr[0]["Department"]}<br>${resArr[0]["Wing"]}`;
         }
     }
     displayBox(html);
+
+    // else if (resArr.length > 1 && showAll) {
+    //     html = `Showing all Results:`;
+    //     resArr.forEach((entry) => {
+    //         html += `<br>${entry["Room Num"]}<br>${entry["Department"]}<br>${entry["Wing"]}`;
+    //     });
+    //     showAll = false;
+    // }
 }
 
 function displayBox(html) {
     alertControl.message = html;
     alertControl.header = `You searched for: ${searchPhrase.toUpperCase()}`;
-    alertControl.buttons = ["ALL", "OK"];
+    alertControl.buttons = ["SHOW ALL", "OK"];
+    // alertControl.buttons = [
+    //     {
+    //         text: "SHOW ALL",
+    //         role: "cancel",
+    //         cssClass: "secondary",
+    //         id: "show-all-button",
+    //         handler: () => {
+    //             showAll = true;
+    //             showOutcome(searchPhrase);
+    //         },
+    //     },
+    //     {
+    //         text: "OK",
+    //         id: "ok-button",
+    //         // handler: () => {
+    //         //     console.log("Confirm Okay");
+    //         // },
+    //     },
+    // ];
     document.body.appendChild(alertControl);
     alertControl.present();
 }
@@ -75,6 +112,7 @@ let resArr = [];
 let dataLoaded = false;
 let allData;
 let html = "<strong>Content Pending</strong>";
+let showAll = false;
 
 const phoneInput = document.querySelector("#input-phone");
 const phoneCancelBtn = document.querySelector("#btn-phone-cancel");
