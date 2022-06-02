@@ -1,5 +1,12 @@
 "use strict";
 
+const closeAllResults = function () {
+    modalControl.innerHTML = `<ion-modal id="test-modal" is-open="false">
+    <ion-content id="modal-content"
+        ></ion-content
+    >`;
+};
+
 // *************************************
 
 function readTextFile(file, callback) {
@@ -26,19 +33,22 @@ readTextFile("./switchdesk1.json", function (text) {
 
 // *************************************
 
-function parseSearch(searchPhrase) {
-    if (searchPhrase == "X RAY" || searchPhrase == "XRAY") {
-        searchPhrase = "X-RAY";
-    }
-    if (searchPhrase == "LABOR") searchPhrase = "LABOUR";
-}
+// function parseSearch(searchPhrase) {
+
+//     return searchPhrase;
+// }
 
 function showOutcome(searchPhrase) {
     resArr = [];
 
     // msgArea.innerHTML = "";
     searchPhrase = searchPhrase.toUpperCase();
-    parseSearch(searchPhrase);
+    if (searchPhrase == "X RAY" || searchPhrase == "XRAY") {
+        searchPhrase = "X-RAY";
+    }
+    if (searchPhrase == "LABOR") searchPhrase = "LABOUR";
+    if (searchPhrase.includes("CONTROL")) searchPhrase = "ADK20044";
+    console.log(">>>", searchPhrase);
 
     let thisDescription = "";
     let thisRoom = "";
@@ -62,46 +72,63 @@ function showOutcome(searchPhrase) {
         html = `Nothing found for '${searchPhrase}'`;
     } else {
         if (resArr.length > 1 && !showAll) {
-            html = `Showing 1st result of ${resArr.length}:<br>${resArr[0]["Room Num"]}<br>${resArr[0]["Department"]}<br>${resArr[0]["Wing"]}`;
+            html = `Showing 1st result of ${resArr.length}:<br>${resArr[0]["Room Num"]}<br>${resArr[0]["Description"]}<br>${resArr[0]["Department"]}<br>${resArr[0]["Wing"]}`;
             console.log(html);
+        } else if (resArr.length > 1 && showAll) {
+            createAllResults(resArr);
         } else {
-            html = `Showing 1 result:<br>${resArr[0]["Room Num"]}<br>${resArr[0]["Department"]}<br>${resArr[0]["Wing"]}`;
+            html = `Showing 1 result:<br>${resArr[0]["Room Num"]}<br>${resArr[0]["Description"]}<br>${resArr[0]["Department"]}<br>${resArr[0]["Wing"]}`;
         }
     }
     displayBox(html);
+}
 
-    // else if (resArr.length > 1 && showAll) {
-    //     html = `Showing all Results:`;
-    //     resArr.forEach((entry) => {
-    //         html += `<br>${entry["Room Num"]}<br>${entry["Department"]}<br>${entry["Wing"]}`;
-    //     });
-    //     showAll = false;
-    // }
+function createAllResults(resArr) {
+    html = `<ion-item>All Results:</ion-item><ion-item style="float:right";><ion-button
+    fill="outline"
+    color="danger"
+    id="all-results-close"
+    onclick=closeAllResults()
+    ><ion-icon
+        slot="start"
+        name="close-outline"
+    ></ion-icon
+    >CLOSE</ion-button
+></ion-item>`;
+    resArr.forEach((entry) => {
+        html += `<br>${resArr[0]["Room Num"]}<br>${resArr[0]["Description"]}<br>${resArr[0]["Department"]}<br>${resArr[0]["Wing"]}<br>`;
+    });
+    showAll = false;
+    html = `<div class="ion-padding">${html}</div>`;
+    modalControl.innerHTML = `<ion-modal id="test-modal" is-open="true" id="card-modal">
+    <ion-content id="modal-content"
+        >${html}</ion-content
+    ></ion-modal>`;
 }
 
 function displayBox(html) {
     alertControl.message = html;
     alertControl.header = `You searched for: ${searchPhrase.toUpperCase()}`;
-    alertControl.buttons = ["SHOW ALL", "OK"];
-    // alertControl.buttons = [
-    //     {
-    //         text: "SHOW ALL",
-    //         role: "cancel",
-    //         cssClass: "secondary",
-    //         id: "show-all-button",
-    //         handler: () => {
-    //             showAll = true;
-    //             showOutcome(searchPhrase);
-    //         },
-    //     },
-    //     {
-    //         text: "OK",
-    //         id: "ok-button",
-    //         // handler: () => {
-    //         //     console.log("Confirm Okay");
-    //         // },
-    //     },
-    // ];
+    // alertControl.buttons = ["SHOW ALL", "OK"];
+    alertControl.buttons = [
+        {
+            text: "SHOW ALL",
+            role: "cancel",
+            cssClass: "secondary",
+            id: "show-all-button",
+            handler: () => {
+                showAll = true;
+                showOutcome(searchPhrase);
+            },
+        },
+        {
+            text: "OK",
+            id: "ok-button",
+            // handler: () => {
+            //     console.log("Confirm Okay");
+            // },
+        },
+    ];
     document.body.appendChild(alertControl);
     alertControl.present();
 }
@@ -121,6 +148,7 @@ const roomInput = document.querySelector("#input-room");
 const roomCancelBtn = document.querySelector("#btn-room-cancel");
 const roomConfirmBtn = document.querySelector("#btn-room-confirm");
 const alertControl = document.createElement("ion-alert");
+const modalControl = document.querySelector("#control-modal");
 
 let totalExpensesNumber = 0;
 
