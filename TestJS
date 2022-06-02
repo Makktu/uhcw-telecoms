@@ -1,0 +1,30 @@
+const jsonData = fetch("https://drive.google.com/file/d/1DtDPzInkKB09hoBfZJjKWOlCZj_fUkMe/view?usp=sharing").then(data => console.log(data));
+
+function go(searchTerm) {
+  console.log(cities.locations[0].title)
+  let result;
+  for (let j = 0; j < cities.locations.length; j++) {
+    if (cities.locations[j].title == searchTerm) {
+      result = cities.locations[j].url;
+      break;
+                                              }
+  }
+  if (!result) console.log("Nothing found");
+  else console.log("Go to " + result);
+}
+
+var cities = {
+  title: "Locations",
+  locations: [
+    {
+      title: "New York",
+      url: "api/newyork.js",
+    },
+    {
+      title: "Dubai",
+      url: "api/dubai.js",
+    },
+  ],
+};
+
+go("Dubai");
