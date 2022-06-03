@@ -1,13 +1,6 @@
 "use strict";
 
-const closeAllResults = function () {
-    modalControl.innerHTML = `<ion-modal id="test-modal" is-open="false">
-    <ion-content id="modal-content"
-        ></ion-content
-    >`;
-};
-
-// *************************************
+// *********** GETTING THE JSON DATA ***********
 
 function readTextFile(file, callback) {
     var rawFile = new XMLHttpRequest();
@@ -27,22 +20,17 @@ readTextFile("./switchdesk1.json", function (text) {
         (acc, entry) => acc.concat(Object.values(entry)),
         []
     );
-    console.log("Check: " + allData[0]["Wing"]);
+    if (allData[0]["Wing"]) console.log("✅ DATA LOADED OK");
     dataLoaded = true;
 });
 
 // *************************************
 
-// function parseSearch(searchPhrase) {
-
-//     return searchPhrase;
-// }
-
 function showOutcome(searchPhrase) {
-    resArr = [];
+    // resArr = [];
+    searchPhrase = searchPhrase.toUpperCase();
 
     // * catch a few common searches and force them
-    searchPhrase = searchPhrase.toUpperCase();
     if (searchPhrase == "X RAY" || searchPhrase == "XRAY") {
         searchPhrase = "X-RAY";
     }
@@ -72,11 +60,8 @@ function showOutcome(searchPhrase) {
         html = `Nothing found for '${searchPhrase}'`;
     } else {
         if (resArr.length > 1 && !showAll) {
-            html = `Showing 1st result of ${resArr.length}:<br>${resArr[0]["Room Num"]}<br>${resArr[0]["Description"]}<br>${resArr[0]["Department"]}<br>${resArr[0]["Wing"]}`;
+            html = `Showing 1 result of ${resArr.length}:<br>${resArr[0]["Room Num"]}<br>${resArr[0]["Description"]}<br>${resArr[0]["Department"]}<br>${resArr[0]["Wing"]}`;
             console.log(html);
-        } else if (resArr.length > 1 && showAll) {
-            // createAllResults(resArr);
-            html = `Show All functionality not done yet...`;
         } else {
             html = `Showing 1 result:<br>${resArr[0]["Room Num"]}<br>${resArr[0]["Description"]}<br>${resArr[0]["Department"]}<br>${resArr[0]["Wing"]}`;
         }
@@ -84,33 +69,14 @@ function showOutcome(searchPhrase) {
     displayBox(html);
 }
 
-/* <ion-item style="float:right";><ion-button
-    fill="outline"
-    color="danger"
-    id="all-results-close"
-    onclick="dismissModal()"
-    ><ion-icon
-        slot="start"
-        name="close-outline"
-    ></ion-icon
-    >CLOSE</ion-button
-></ion-item> */
-
 function createAllResults(resArr) {
-    html = `<ion-item>All Results:</ion-item><ion-buttons slot="primary">
-    <ion-button id="results-closer" style="opacity:1">
-      <ion-icon slot="icon-only" name="close"></ion-icon>CLOSE WINDOW
-    </ion-button>
-  </ion-buttons>`;
+    html = `<div style="overflow-y:auto;max-height:200px;"><ion-item>All Results (${resArr.length}):</ion-item>`;
     resArr.forEach((entry) => {
-        html += `<br>${resArr[0]["Room Num"]}<br>${resArr[0]["Description"]}<br>${resArr[0]["Department"]}<br>${resArr[0]["Wing"]}<br>`;
+        html += `<br>${entry["Room Num"]}<br>${entry["Description"]}<br>${entry["Department"]}<br>${entry["Wing"]}<br>`;
     });
+    html += `<hr></hr></div>`;
     showAll = false;
-    html = `<div class="ion-padding">${html}</div>`;
-    modalControl.innerHTML = `<ion-modal id="test-modal" is-open="true" id="card-modal">
-    <ion-content id="modal-content"
-        >${html}</ion-content
-    ></ion-modal>`;
+    msgArea.innerHTML = html;
 }
 
 function displayBox(html) {
@@ -125,7 +91,7 @@ function displayBox(html) {
             id: "show-all-button",
             handler: () => {
                 showAll = true;
-                showOutcome(searchPhrase);
+                createAllResults(resArr);
             },
         },
         {
@@ -156,6 +122,7 @@ const roomCancelBtn = document.querySelector("#btn-room-cancel");
 const roomConfirmBtn = document.querySelector("#btn-room-confirm");
 const alertControl = document.createElement("ion-alert");
 const modalControl = document.querySelector("#control-modal");
+const msgArea = document.querySelector("#all-rooms");
 
 const clearFields = function () {
     phoneInput.value = "";
@@ -182,6 +149,8 @@ roomConfirmBtn.addEventListener("click", () => {
     if (roomInput.value) {
         searchPhrase = roomInput.value;
         clearFields();
+        resArr = [];
+        if (msgArea.innerHTML) msgArea.innerHTML = "";
         showOutcome(searchPhrase);
     } else {
         alertControl.message = "Enter a search term first";

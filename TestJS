@@ -1,30 +1,11 @@
-const jsonData = fetch("https://drive.google.com/file/d/1DtDPzInkKB09hoBfZJjKWOlCZj_fUkMe/view?usp=sharing").then(data => console.log(data));
-
-function go(searchTerm) {
-  console.log(cities.locations[0].title)
-  let result;
-  for (let j = 0; j < cities.locations.length; j++) {
-    if (cities.locations[j].title == searchTerm) {
-      result = cities.locations[j].url;
-      break;
-                                              }
+let wards = [{
+  "Ward 22": {
+    "Numbers": "Area-1: 26186, Area-2: 25757, Area-3: 25758"
+  },
+  "Day Surgery": {
+    "Numbers": "26868, 26869"
+  },
+  "Ward 3": {
+    "Numbers": "12345, 67890"
   }
-  if (!result) console.log("Nothing found");
-  else console.log("Go to " + result);
-}
-
-var cities = {
-  title: "Locations",
-  locations: [
-    {
-      title: "New York",
-      url: "api/newyork.js",
-    },
-    {
-      title: "Dubai",
-      url: "api/dubai.js",
-    },
-  ],
-};
-
-go("Dubai");
+}]
