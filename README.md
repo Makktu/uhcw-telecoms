@@ -2,7 +2,7 @@
 
 A location and phone search for a large hospital.
 
-Currently building out the functionality of the app before embarking on the design. (Figma Prototype viewable here: https://www.figma.com/proto/SSQWbRJUFlf0eBMC2lIVV4/Tutorial?page-id=0%3A1&node-id=0%3A1&viewport=398%2C317%2C1&scaling=scale-down&starting-point-node-id=2%3A5)
+Currently building out the functionality of the app before embarking on the design. [Figma Prototype viewable here](https://www.figma.com/proto/SSQWbRJUFlf0eBMC2lIVV4/Tutorial?page-id=0%3A1&node-id=0%3A1&viewport=398%2C317%2C1&scaling=scale-down&starting-point-node-id=2%3A5)
 
 To fix (as of 2 June 2022):
 
