@@ -1,5 +1,28 @@
 "use strict";
 
+let searchPhrase;
+let searchComplete = false;
+let foundWard = [];
+let message;
+let topKeys = [];
+let roomNums = [];
+let telNums;
+let resArr = [];
+let dataLoaded = false;
+let allData;
+let html = "<strong>Content Pending</strong>";
+let showAll = false;
+
+const phoneInput = document.querySelector("#input-phone");
+const phoneCancelBtn = document.querySelector("#btn-phone-cancel");
+const phoneConfirmBtn = document.querySelector("#btn-phone-confirm");
+const roomInput = document.querySelector("#input-room");
+const roomCancelBtn = document.querySelector("#btn-room-cancel");
+const roomConfirmBtn = document.querySelector("#btn-room-confirm");
+const alertControl = document.createElement("ion-alert");
+const modalControl = document.querySelector("#control-modal");
+const msgArea = document.querySelector("#all-rooms");
+
 // *********** GETTING THE JSON DATA ***********
 
 function readTextFile(file, callback) {
@@ -24,7 +47,90 @@ readTextFile("./switchdesk1.json", function (text) {
     dataLoaded = true;
 });
 
+readTextFile("./telephone.json", function (text) {
+    telNums = JSON.parse(text);
+    telNums = telNums[0];
+    dataLoaded = true;
+    topKeys = Object.keys(telNums);
+});
+
 // *************************************
+
+function numberSearch(searchPhrase) {
+    let thisWard, thisArea;
+    searchPhrase += "";
+    topKeys.forEach((entry) => {
+        thisWard = entry;
+        let thisObject = telNums[entry];
+        let thisObjKeys = Object.keys(thisObject);
+        thisObjKeys.forEach((nextEntry, ind) => {
+            thisArea = nextEntry;
+            for (let number in nextEntry) {
+                if (telNums[entry][nextEntry][number] == searchPhrase) {
+                    console.log(
+                        `✅ Extension ${searchPhrase} is located at ${thisWard}, ${thisArea}`
+                    );
+                    searchComplete = true;
+                    return;
+                }
+            }
+        });
+    });
+}
+
+function telephoneSearch(searchPhrase) {
+    numberSearch(searchPhrase);
+    if (searchComplete) {
+        searchComplete = false;
+        return;
+    }
+    searchPhrase = searchPhrase.toUpperCase();
+    for (let entry of topKeys) {
+        if (entry.includes(searchPhrase)) {
+            foundWard.push(entry);
+        }
+    }
+    if (foundWard.length == 0) {
+        console.log("Nothing found. Check spelling and try again.");
+        return;
+    }
+    if (foundWard) {
+        searchPhrase = foundWard[0];
+        console.log(telNums[`${searchPhrase}`]);
+        if (typeof telNums[`${searchPhrase}`] == "object") {
+            let promising = Object.keys(telNums[`${searchPhrase}`]);
+            for (let entry of promising) {
+                console.log(
+                    telNums[`${searchPhrase}`][entry][0],
+                    telNums[`${searchPhrase}`][entry][1]
+                        ? telNums[`${searchPhrase}`][entry][1]
+                        : "",
+                    telNums[`${searchPhrase}`][entry][2]
+                        ? telNums[`${searchPhrase}`][entry][2]
+                        : "",
+                    telNums[`${searchPhrase}`][entry][3]
+                        ? telNums[`${searchPhrase}`][entry][3]
+                        : ""
+                );
+            }
+        }
+        if (foundWard.length > 1) {
+            console.log("MORE???");
+            for (let multiple of foundWard) {
+                console.log(multiple);
+            }
+        }
+        foundWard = [];
+        messages(message);
+    }
+}
+
+function testConvert(ext) {
+    // * converts 5-digit internal extension into external diallable number prefixed by 02476 96XXXX
+    let outsideDial = "02476 96";
+    let fullNumber = outsideDial + ext.slice(-4);
+    return fullNumber;
+}
 
 function showOutcome(searchPhrase) {
     // resArr = [];
@@ -106,24 +212,6 @@ function displayBox(html) {
     alertControl.present();
 }
 
-let searchPhrase;
-let roomNums = [];
-let resArr = [];
-let dataLoaded = false;
-let allData;
-let html = "<strong>Content Pending</strong>";
-let showAll = false;
-
-const phoneInput = document.querySelector("#input-phone");
-const phoneCancelBtn = document.querySelector("#btn-phone-cancel");
-const phoneConfirmBtn = document.querySelector("#btn-phone-confirm");
-const roomInput = document.querySelector("#input-room");
-const roomCancelBtn = document.querySelector("#btn-room-cancel");
-const roomConfirmBtn = document.querySelector("#btn-room-confirm");
-const alertControl = document.createElement("ion-alert");
-const modalControl = document.querySelector("#control-modal");
-const msgArea = document.querySelector("#all-rooms");
-
 const clearFields = function () {
     phoneInput.value = "";
     roomInput.value = "";
@@ -132,10 +220,13 @@ const clearFields = function () {
 phoneConfirmBtn.addEventListener("click", () => {
     if (phoneInput.value) {
         searchPhrase = phoneInput.value;
+        searchPhrase = searchPhrase.toUpperCase();
+        phoneInput.value = "";
         clearFields();
-        displayBox("This part's not working yet. Coming soon...");
-        // showOutcome(enteredPhone);
-        // getResults(enteredPhone);
+
+        if (dataLoaded && searchPhrase) {
+            telephoneSearch(searchPhrase);
+        }
     } else {
         alertControl.message = "Enter a search term first";
         alertControl.header = "No Input";
