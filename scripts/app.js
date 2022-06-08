@@ -15,6 +15,7 @@ let showAll = false;
 let roomSearch = false;
 let phoneSearch = false;
 let theWard;
+let numberToCall = "";
 
 const phoneInput = document.querySelector("#input-phone");
 const phoneCancelBtn = document.querySelector("#btn-phone-cancel");
@@ -64,8 +65,15 @@ readTextFile("./telephone.json", function (text) {
 
 // *************************************
 
-function callNumber() {
-    window.open("tel:07564916006");
+function callNumber(numberToCall) {
+    console.log("!!!!", numberToCall);
+    numberToCall += "";
+    numberToCall = testConvert(numberToCall);
+
+    console.log("CONVERTED TO:", numberToCall);
+    window.open(`tel:${numberToCall}`);
+
+    numberToCall = "";
 }
 
 function numberSearch(searchPhrase) {
@@ -80,8 +88,10 @@ function numberSearch(searchPhrase) {
             for (let number in nextEntry) {
                 if (telNums[entry][nextEntry][number] == searchPhrase) {
                     displayBox(
-                        `✅ Extension ${searchPhrase} is located at ${thisWard}, ${thisArea}`
+                        `✅ Extension ${searchPhrase} is located at ${thisWard}, ${thisArea}`,
+                        searchPhrase
                     );
+                    numberToCall = searchPhrase;
                     searchComplete = true;
                     return;
                 }
@@ -118,8 +128,11 @@ function telephoneSearch(searchPhrase) {
             // message += `${searchPhrase}<br>`;
             if (theWard.length > 16) theWard = theWard.slice(0, 13);
             message += `✅ ${theWard}<br>`;
+            numberToCall = "";
             for (let entry of promising) {
-                console.log(topKeys);
+                console.log(telNums[searchPhrase][entry][0]);
+                if (!numberToCall)
+                    numberToCall = telNums[searchPhrase][entry][0];
                 message += `${entry}: ${telNums[searchPhrase][entry][0]}<br>`;
                 if (telNums[searchPhrase][entry][1]) {
                     message += `${entry}: ${telNums[searchPhrase][entry][1]}<br>`;
@@ -131,18 +144,18 @@ function telephoneSearch(searchPhrase) {
                     message += `${telNums[searchPhrase][entry][3]}<br>`;
                 }
 
-                console.log(
-                    telNums[`${searchPhrase}`][entry][0],
-                    telNums[`${searchPhrase}`][entry][1]
-                        ? telNums[`${searchPhrase}`][entry][1]
-                        : "",
-                    telNums[`${searchPhrase}`][entry][2]
-                        ? telNums[`${searchPhrase}`][entry][2]
-                        : "",
-                    telNums[`${searchPhrase}`][entry][3]
-                        ? telNums[`${searchPhrase}`][entry][3]
-                        : ""
-                );
+                // console.log(
+                //     telNums[`${searchPhrase}`][entry][0],
+                //     telNums[`${searchPhrase}`][entry][1]
+                //         ? telNums[`${searchPhrase}`][entry][1]
+                //         : "",
+                //     telNums[`${searchPhrase}`][entry][2]
+                //         ? telNums[`${searchPhrase}`][entry][2]
+                //         : "",
+                //     telNums[`${searchPhrase}`][entry][3]
+                //         ? telNums[`${searchPhrase}`][entry][3]
+                //         : ""
+                // );
             }
         }
         if (foundWard.length > 1) {
@@ -152,14 +165,14 @@ function telephoneSearch(searchPhrase) {
             }
         }
         foundWard = [];
-        displayBox(message);
+        displayBox(message, numberToCall);
     }
 }
 
 function testConvert(ext) {
     // * converts 5-digit internal extension into external diallable number prefixed by 02476 96XXXX
     let outsideDial = "02476 96";
-    let fullNumber = outsideDial + ext.slice(-4);
+    let fullNumber = outsideDial + ext.slice(-4) + "";
     return fullNumber;
 }
 
@@ -216,7 +229,7 @@ function createAllResults(resArr) {
     msgArea.innerHTML = html;
 }
 
-function displayBox(html) {
+function displayBox(html, numberToCall) {
     if (!firstUp) {
         firstUp = true;
         alertControl.message = html;
@@ -262,6 +275,7 @@ function displayBox(html) {
     }
 
     if (phoneSearch) {
+        console.log("???", numberToCall);
         alertControl.buttons = [
             {
                 text: "SAVE 1ST NUMBER",
@@ -270,7 +284,7 @@ function displayBox(html) {
                 id: "show-all-button",
                 handler: () => {
                     showAll = true;
-                    callNumber(resArr);
+                    callNumber();
                 },
             },
             {
@@ -280,7 +294,7 @@ function displayBox(html) {
                 id: "show-all-button",
                 handler: () => {
                     showAll = true;
-                    callNumber(resArr);
+                    callNumber(numberToCall);
                 },
             },
             {
