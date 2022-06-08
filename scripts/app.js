@@ -12,6 +12,8 @@ let dataLoaded = false;
 let allData;
 let html = "<strong>Content Pending</strong>";
 let showAll = false;
+let roomSearch = false;
+let phoneSearch = false;
 
 const phoneInput = document.querySelector("#input-phone");
 const phoneCancelBtn = document.querySelector("#btn-phone-cancel");
@@ -67,7 +69,7 @@ function numberSearch(searchPhrase) {
             thisArea = nextEntry;
             for (let number in nextEntry) {
                 if (telNums[entry][nextEntry][number] == searchPhrase) {
-                    console.log(
+                    displayBox(
                         `✅ Extension ${searchPhrase} is located at ${thisWard}, ${thisArea}`
                     );
                     searchComplete = true;
@@ -91,15 +93,31 @@ function telephoneSearch(searchPhrase) {
         }
     }
     if (foundWard.length == 0) {
-        console.log("Nothing found. Check spelling and try again.");
+        roomSearch = false;
+        phoneSearch = false;
+        displayBox("❌ Nothing found. Check spelling and try again.");
         return;
     }
     if (foundWard) {
         searchPhrase = foundWard[0];
-        console.log(telNums[`${searchPhrase}`]);
+        // console.log(telNums[`${searchPhrase}`]);
+        message = "";
         if (typeof telNums[`${searchPhrase}`] == "object") {
             let promising = Object.keys(telNums[`${searchPhrase}`]);
+            // message += `${searchPhrase}<br>`;
             for (let entry of promising) {
+                console.log(entry);
+                message += `${entry}: ${telNums[searchPhrase][entry][0]}<br>`;
+                if (telNums[searchPhrase][entry][1]) {
+                    message += `${entry}: ${telNums[searchPhrase][entry][1]}<br>`;
+                }
+                if (telNums[searchPhrase][entry][2]) {
+                    message += `${entry}: ${telNums[searchPhrase][entry][2]}<br>`;
+                }
+                if (telNums[searchPhrase][entry][3]) {
+                    message += `${telNums[searchPhrase][entry][3]}<br>`;
+                }
+
                 console.log(
                     telNums[`${searchPhrase}`][entry][0],
                     telNums[`${searchPhrase}`][entry][1]
@@ -121,7 +139,7 @@ function telephoneSearch(searchPhrase) {
             }
         }
         foundWard = [];
-        messages(message);
+        displayBox(message);
     }
 }
 
@@ -163,7 +181,7 @@ function showOutcome(searchPhrase) {
     });
 
     if (resArr.length == 0) {
-        html = `Nothing found for '${searchPhrase}'`;
+        html = `❌ Nothing found for '${searchPhrase}'`;
     } else {
         if (resArr.length > 1 && !showAll) {
             html = `Showing 1 result of ${resArr.length}:<br>${resArr[0]["Room Num"]}<br>${resArr[0]["Description"]}<br>${resArr[0]["Department"]}<br>${resArr[0]["Wing"]}`;
@@ -187,27 +205,54 @@ function createAllResults(resArr) {
 
 function displayBox(html) {
     alertControl.message = html;
-    alertControl.header = `You searched for: ${searchPhrase.toUpperCase()}`;
+    alertControl.header = `${searchPhrase.toUpperCase()}`;
     // alertControl.buttons = ["SHOW ALL", "OK"];
-    alertControl.buttons = [
-        {
-            text: "SHOW ALL",
-            // role: "cancel",
-            cssClass: "secondary",
-            id: "show-all-button",
-            handler: () => {
-                showAll = true;
-                createAllResults(resArr);
+
+    if (roomSearch) {
+        alertControl.buttons = [
+            {
+                text: "SHOW ALL",
+                // role: "cancel",
+                cssClass: "secondary",
+                id: "show-all-button",
+                handler: () => {
+                    showAll = true;
+                    createAllResults(resArr);
+                },
             },
-        },
-        {
-            text: "OK",
-            id: "ok-button",
-            // handler: () => {
-            //     console.log("Confirm Okay");
-            // },
-        },
-    ];
+            {
+                text: "OK",
+                id: "ok-button",
+                // handler: () => {
+                //     console.log("Confirm Okay");
+                // },
+            },
+        ];
+        roomSearch = false;
+    }
+
+    if (phoneSearch) {
+        alertControl.buttons = [
+            {
+                text: "CALL NOW",
+                // role: "cancel",
+                cssClass: "secondary",
+                id: "show-all-button",
+                handler: () => {
+                    showAll = true;
+                    callNumber(resArr);
+                },
+            },
+            {
+                text: "OK",
+                id: "ok-button",
+                // handler: () => {
+                //     console.log("Confirm Okay");
+                // },
+            },
+        ];
+        phoneSearch = false;
+    }
     document.body.appendChild(alertControl);
     alertControl.present();
 }
@@ -225,6 +270,7 @@ phoneConfirmBtn.addEventListener("click", () => {
         clearFields();
 
         if (dataLoaded && searchPhrase) {
+            phoneSearch = true;
             telephoneSearch(searchPhrase);
         }
     } else {
@@ -242,6 +288,7 @@ roomConfirmBtn.addEventListener("click", () => {
         clearFields();
         resArr = [];
         if (msgArea.innerHTML) msgArea.innerHTML = "";
+        roomSearch = true;
         showOutcome(searchPhrase);
     } else {
         alertControl.message = "Enter a search term first";
