@@ -28,6 +28,11 @@ const msgArea = document.querySelector("#all-rooms");
 
 // *********** GETTING THE JSON DATA ***********
 
+function firstRun() {
+    let firstMessage = `🙋🏽‍♀️ Welcome to the unofficial app of Switchboard and Helpdesk at UHCW.<br>➡️ Search for any ward, department or telephone number.<br>➡️ Perform 'reverse lookup' of any phone number to check where it comes from.<br>🏗️ This app is still under development.<br>🔗 Tap the link at the bottom of the page for a preview of how it will look and work when finished!<br>❗Please be aware that information contained in this app may be incomplete, and is subject to change at short notice.`;
+    displayBox(firstMessage);
+}
+
 function readTextFile(file, callback) {
     var rawFile = new XMLHttpRequest();
     rawFile.overrideMimeType("application/json");
@@ -212,6 +217,23 @@ function createAllResults(resArr) {
 }
 
 function displayBox(html) {
+    if (!firstUp) {
+        firstUp = true;
+        alertControl.message = html;
+        alertControl.header = `☎️ UHCW Telecoms 🗺️`;
+        alertControl.buttons = [
+            {
+                text: "OK",
+                id: "ok-button",
+                // handler: () => {
+                //     console.log("Confirm Okay");
+                // },
+            },
+        ];
+        document.body.appendChild(alertControl);
+        alertControl.present();
+        return;
+    }
     alertControl.message = html;
     alertControl.header = `${searchPhrase.toUpperCase()}`;
     // alertControl.buttons = ["SHOW ALL", "OK"];
@@ -328,3 +350,6 @@ roomCancelBtn.addEventListener("click", () => {
         clearFields();
     }
 });
+
+let firstUp = false;
+if (!firstUp) firstRun();
