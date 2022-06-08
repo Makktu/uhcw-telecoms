@@ -200,7 +200,7 @@
         },
         "MAIN RECEPTION": { "THE MALL": [28215, 28216] },
         "SECURITY": { "THE MALL": [26048] },
-        "SWITCHBOARD": { "FM BUILDING": [0] },
+        "SWITCHBOARD": { "FM BUILDING": [24000, "0"] },
         "HELPDESK": { "FM BUILDING": [25555] },
         "PORTERS": {
             "PORTER MANAGER": [27413],
