@@ -65,7 +65,7 @@ readTextFile("./telephone.json", function (text) {
 // *************************************
 
 function callNumber() {
-    alert("not done this part yet");
+    window.open("tel:07564916006");
 }
 
 function numberSearch(searchPhrase) {
@@ -117,7 +117,7 @@ function telephoneSearch(searchPhrase) {
             let promising = Object.keys(telNums[`${searchPhrase}`]);
             // message += `${searchPhrase}<br>`;
             if (theWard.length > 16) theWard = theWard.slice(0, 13);
-            message += `✅${theWard}<br>`;
+            message += `✅ ${theWard}<br>`;
             for (let entry of promising) {
                 console.log(topKeys);
                 message += `${entry}: ${telNums[searchPhrase][entry][0]}<br>`;
@@ -264,7 +264,7 @@ function displayBox(html) {
     if (phoneSearch) {
         alertControl.buttons = [
             {
-                text: "SAVE NUMBER",
+                text: "SAVE 1ST NUMBER",
                 // role: "cancel",
                 cssClass: "secondary",
                 id: "show-all-button",
@@ -274,7 +274,7 @@ function displayBox(html) {
                 },
             },
             {
-                text: "CALL TOP NUMBER",
+                text: `CALL NOW`,
                 // role: "cancel",
                 cssClass: "secondary",
                 id: "show-all-button",
