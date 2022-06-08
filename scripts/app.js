@@ -277,16 +277,16 @@ function displayBox(html, numberToCall) {
     if (phoneSearch) {
         console.log("???", numberToCall);
         alertControl.buttons = [
-            {
-                text: "SAVE 1ST NUMBER",
-                // role: "cancel",
-                cssClass: "secondary",
-                id: "show-all-button",
-                handler: () => {
-                    showAll = true;
-                    callNumber();
-                },
-            },
+            // {
+            //     text: "SAVE 1ST NUMBER",
+            //     // role: "cancel",
+            //     cssClass: "secondary",
+            //     id: "show-all-button",
+            //     handler: () => {
+            //         showAll = true;
+            //         callNumber();
+            //     },
+            // },
             {
                 text: `CALL NOW`,
                 // role: "cancel",
