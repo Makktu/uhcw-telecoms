@@ -14,6 +14,7 @@ let html = "<strong>Content Pending</strong>";
 let showAll = false;
 let roomSearch = false;
 let phoneSearch = false;
+let theWard;
 
 const phoneInput = document.querySelector("#input-phone");
 const phoneCancelBtn = document.querySelector("#btn-phone-cancel");
@@ -58,6 +59,10 @@ readTextFile("./telephone.json", function (text) {
 
 // *************************************
 
+function callNumber() {
+    alert("not done this part yet");
+}
+
 function numberSearch(searchPhrase) {
     let thisWard, thisArea;
     searchPhrase += "";
@@ -91,6 +96,7 @@ function telephoneSearch(searchPhrase) {
         if (entry.includes(searchPhrase)) {
             foundWard.push(entry);
         }
+        theWard = foundWard[0];
     }
     if (foundWard.length == 0) {
         roomSearch = false;
@@ -105,8 +111,10 @@ function telephoneSearch(searchPhrase) {
         if (typeof telNums[`${searchPhrase}`] == "object") {
             let promising = Object.keys(telNums[`${searchPhrase}`]);
             // message += `${searchPhrase}<br>`;
+            if (theWard.length > 16) theWard = theWard.slice(0, 13);
+            message += `✅${theWard}<br>`;
             for (let entry of promising) {
-                console.log(entry);
+                console.log(topKeys);
                 message += `${entry}: ${telNums[searchPhrase][entry][0]}<br>`;
                 if (telNums[searchPhrase][entry][1]) {
                     message += `${entry}: ${telNums[searchPhrase][entry][1]}<br>`;
@@ -234,7 +242,17 @@ function displayBox(html) {
     if (phoneSearch) {
         alertControl.buttons = [
             {
-                text: "CALL NOW",
+                text: "SAVE NUMBER",
+                // role: "cancel",
+                cssClass: "secondary",
+                id: "show-all-button",
+                handler: () => {
+                    showAll = true;
+                    callNumber(resArr);
+                },
+            },
+            {
+                text: "CALL TOP NUMBER",
                 // role: "cancel",
                 cssClass: "secondary",
                 id: "show-all-button",
