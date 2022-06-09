@@ -5,7 +5,8 @@
         <style type="text/css">
             :root {
                 /* Set the background of the entire app */
-                /* --ion-background-color: #c0c3da; */
+                /* --ion-background-color: #3d8f58; */
+                /* --ion-color: #e5ecec; */
 
                 /* Set the font family of the entire app */
                 /* --ion-font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Roboto', sans-serif; */
@@ -18,8 +19,19 @@
                 text-align: right;
             }
 
+            /* ion-app {
+                color: white;
+            } */
+
             #all-rooms {
                 background-color: beige;
+            }
+
+            #phone-results-header {
+                font-size: 125%;
+            }
+            #phone-results {
+                font-size: 125%;
             }
 
             ion-icon {
@@ -74,14 +86,13 @@
                                         <ion-icon
                                             name="call-outline"
                                         ></ion-icon>
-                                        Find A Number
+                                        Switchboard
                                     </ion-card-title>
                                 </ion-card-header>
                                 <ion-card-content>
                                     <ion-item>
                                         <ion-label position="floating"
-                                            >Enter Ward/Dept name or
-                                            number</ion-label
+                                            >Search Here For Any Dept</ion-label
                                         >
                                         <ion-input
                                             type="text"
@@ -117,14 +128,13 @@
                                         <ion-icon
                                             name="locate-outline"
                                         ></ion-icon>
-                                        Find A Place
+                                        Helpdesk
                                     </ion-card-title>
                                 </ion-card-header>
                                 <ion-card-content>
                                     <ion-item>
                                         <ion-label position="floating"
-                                            >Enter Ward/Dept name or room
-                                            number</ion-label
+                                            >Search by Room Number</ion-label
                                         >
                                         <ion-input
                                             type="text"

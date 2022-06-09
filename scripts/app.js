@@ -16,6 +16,7 @@ let roomSearch = false;
 let phoneSearch = false;
 let theWard;
 let numberToCall = "";
+let promising;
 
 const phoneInput = document.querySelector("#input-phone");
 const phoneCancelBtn = document.querySelector("#btn-phone-cancel");
@@ -30,7 +31,7 @@ const msgArea = document.querySelector("#all-rooms");
 // *********** GETTING THE JSON DATA ***********
 
 function firstRun() {
-    let firstMessage = `🙋🏽‍♀️ Welcome to the unofficial app of Switchboard and Helpdesk at UHCW.<br>➡️ Search for any ward, department or telephone number.<br>➡️ Perform 'reverse lookup' of any phone number to check where it comes from.<br>🏗️ This app is still under development.<br>🔗 Tap the link at the bottom of the page for a preview of how it will look and work when finished!<br>❗Please be aware that information contained in this app may be incomplete, and is subject to change at short notice.`;
+    let firstMessage = `🙋🏽‍♀️ Welcome to the unofficial app of Switchboard and Helpdesk at UHCW.<br>➡️ Search for any ward, department or telephone number.<br>➡️ Perform 'reverse lookup' of any phone number to check which Department it is from.<br>👷🏽‍♂️ This app is under active development and is not yet feature-complete.<br>🔗 Tap the link at the bottom of the page for a preview of how it will look and work when finished!<br>❗Please be aware that information contained in this app may be incomplete, and is subject to change at short notice.`;
     displayBox(firstMessage);
 }
 
@@ -64,6 +65,10 @@ readTextFile("./telephone.json", function (text) {
 });
 
 // *************************************
+
+function testOther(msg) {
+    console.log(msg);
+}
 
 function callNumber(numberToCall) {
     console.log("!!!!", numberToCall);
@@ -121,14 +126,14 @@ function telephoneSearch(searchPhrase) {
     }
     if (foundWard) {
         searchPhrase = foundWard[0];
-        // console.log(telNums[`${searchPhrase}`]);
         message = "";
         if (typeof telNums[`${searchPhrase}`] == "object") {
-            let promising = Object.keys(telNums[`${searchPhrase}`]);
+            promising = Object.keys(telNums[`${searchPhrase}`]);
             // message += `${searchPhrase}<br>`;
-            if (theWard.length > 16) theWard = theWard.slice(0, 13);
-            message += `✅ ${theWard}<br>`;
+            // if (theWard.length > 18) theWard = theWard.slice(0, 17);
+            message += `<div id="phone-results-header"><br><strong>${theWard}</strong></div><br><br>`;
             numberToCall = "";
+            console.log("👷🏽‍♂️", promising);
             for (let entry of promising) {
                 console.log(telNums[searchPhrase][entry][0]);
                 if (!numberToCall)
@@ -248,7 +253,8 @@ function displayBox(html, numberToCall) {
         return;
     }
     alertControl.message = html;
-    alertControl.header = `${searchPhrase.toUpperCase()}`;
+    // alertControl.header = `You Searched: ${searchPhrase.toUpperCase()}`;
+    // alertControl.header = ``;
     // alertControl.buttons = ["SHOW ALL", "OK"];
 
     if (roomSearch) {
@@ -277,18 +283,8 @@ function displayBox(html, numberToCall) {
     if (phoneSearch) {
         console.log("???", numberToCall);
         alertControl.buttons = [
-            // {
-            //     text: "SAVE 1ST NUMBER",
-            //     // role: "cancel",
-            //     cssClass: "secondary",
-            //     id: "show-all-button",
-            //     handler: () => {
-            //         showAll = true;
-            //         callNumber();
-            //     },
-            // },
             {
-                text: `CALL NOW`,
+                text: `📲 CALL ${numberToCall} NOW`,
                 // role: "cancel",
                 cssClass: "secondary",
                 id: "show-all-button",
@@ -298,7 +294,18 @@ function displayBox(html, numberToCall) {
                 },
             },
             {
-                text: "OK",
+                text: "📃PICK OTHER NUMBER",
+                // role: "cancel",
+                cssClass: "secondary",
+                id: "show-all-button",
+                handler: () => {
+                    showAll = true;
+                    testOther("ONE");
+                    testOther("TWO");
+                },
+            },
+            {
+                text: "❌ CLOSE",
                 id: "ok-button",
                 // handler: () => {
                 //     console.log("Confirm Okay");
