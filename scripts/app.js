@@ -16,6 +16,7 @@ let roomSearch = false;
 let phoneSearch = false;
 let theWard;
 let numberToCall = "";
+let allNumbersToCall = [];
 let promising;
 
 const phoneInput = document.querySelector("#input-phone");
@@ -27,6 +28,7 @@ const roomConfirmBtn = document.querySelector("#btn-room-confirm");
 const alertControl = document.createElement("ion-alert");
 const modalControl = document.querySelector("#control-modal");
 const msgArea = document.querySelector("#all-rooms");
+const switchMsgArea = document.querySelector("#all-numbers");
 
 // *********** GETTING THE JSON DATA ***********
 
@@ -131,37 +133,33 @@ function telephoneSearch(searchPhrase) {
             promising = Object.keys(telNums[`${searchPhrase}`]);
             // message += `${searchPhrase}<br>`;
             // if (theWard.length > 18) theWard = theWard.slice(0, 17);
-            message += `<div id="phone-results-header"><br><strong>${theWard}</strong></div><br><br>`;
+            message += `<div id="phone-results-header"><br><strong>${theWard}</strong></div>`;
             numberToCall = "";
             console.log("👷🏽‍♂️", promising);
+            allNumbersToCall = [];
             for (let entry of promising) {
+                console.log(">>>>>>>>", entry);
+
                 console.log(telNums[searchPhrase][entry][0]);
-                if (!numberToCall)
+                if (!numberToCall) {
                     numberToCall = telNums[searchPhrase][entry][0];
+                }
                 message += `${entry}: ${telNums[searchPhrase][entry][0]}<br>`;
+                allNumbersToCall.push(telNums[searchPhrase][entry][0]);
                 if (telNums[searchPhrase][entry][1]) {
                     message += `${entry}: ${telNums[searchPhrase][entry][1]}<br>`;
+                    allNumbersToCall.push(telNums[searchPhrase][entry][1]);
                 }
                 if (telNums[searchPhrase][entry][2]) {
                     message += `${entry}: ${telNums[searchPhrase][entry][2]}<br>`;
+                    allNumbersToCall.push(telNums[searchPhrase][entry][2]);
                 }
                 if (telNums[searchPhrase][entry][3]) {
                     message += `${telNums[searchPhrase][entry][3]}<br>`;
+                    allNumbersToCall.push(telNums[searchPhrase][entry][3]);
                 }
-
-                // console.log(
-                //     telNums[`${searchPhrase}`][entry][0],
-                //     telNums[`${searchPhrase}`][entry][1]
-                //         ? telNums[`${searchPhrase}`][entry][1]
-                //         : "",
-                //     telNums[`${searchPhrase}`][entry][2]
-                //         ? telNums[`${searchPhrase}`][entry][2]
-                //         : "",
-                //     telNums[`${searchPhrase}`][entry][3]
-                //         ? telNums[`${searchPhrase}`][entry][3]
-                //         : ""
-                // );
             }
+            console.log("======", allNumbersToCall);
         }
         if (foundWard.length > 1) {
             console.log("MORE???");
@@ -234,6 +232,31 @@ function createAllResults(resArr) {
     msgArea.innerHTML = html;
 }
 
+function displayAllNumbers(allNumbersToCall) {
+    const alert = document.createElement("ion-alert");
+    alert.cssClass = "my-custom-class";
+    alert.header = "CHOOSE NUMBER";
+    let allAlerts = [];
+    for (let number of allNumbersToCall) {
+        allAlerts.push({
+            text: `📲 CALL ${number} NOW`,
+            id: "ok-button",
+            handler: () => {
+                callNumber(number);
+            },
+        });
+    }
+    allAlerts.push({
+        text: "❌ CLOSE",
+        id: "close-button",
+    });
+    alert.message = "";
+    alert.buttons = allAlerts;
+
+    document.body.appendChild(alert);
+    return alert.present();
+}
+
 function displayBox(html, numberToCall) {
     if (!firstUp) {
         firstUp = true;
@@ -253,9 +276,6 @@ function displayBox(html, numberToCall) {
         return;
     }
     alertControl.message = html;
-    // alertControl.header = `You Searched: ${searchPhrase.toUpperCase()}`;
-    // alertControl.header = ``;
-    // alertControl.buttons = ["SHOW ALL", "OK"];
 
     if (roomSearch) {
         alertControl.buttons = [
@@ -272,24 +292,18 @@ function displayBox(html, numberToCall) {
             {
                 text: "OK",
                 id: "ok-button",
-                // handler: () => {
-                //     console.log("Confirm Okay");
-                // },
             },
         ];
         roomSearch = false;
     }
 
     if (phoneSearch) {
-        console.log("???", numberToCall);
         alertControl.buttons = [
             {
                 text: `📲 CALL ${numberToCall} NOW`,
-                // role: "cancel",
                 cssClass: "secondary",
-                id: "show-all-button",
+                id: "call-button",
                 handler: () => {
-                    showAll = true;
                     callNumber(numberToCall);
                 },
             },
@@ -299,14 +313,12 @@ function displayBox(html, numberToCall) {
                 cssClass: "secondary",
                 id: "show-all-button",
                 handler: () => {
-                    showAll = true;
-                    testOther("ONE");
-                    testOther("TWO");
+                    displayAllNumbers(allNumbersToCall);
                 },
             },
             {
                 text: "❌ CLOSE",
-                id: "ok-button",
+                id: "close-button",
                 // handler: () => {
                 //     console.log("Confirm Okay");
                 // },
@@ -314,6 +326,7 @@ function displayBox(html, numberToCall) {
         ];
         phoneSearch = false;
     }
+
     document.body.appendChild(alertControl);
     alertControl.present();
 }
