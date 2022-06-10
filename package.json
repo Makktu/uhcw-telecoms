@@ -1,7 +1,3 @@
 {
-    "dependencies": {
-        "module": "^1.0.0",
-        "sqlite3": "^5.0.8",
-        "tabletop": "^1.6.3"
-    }
+    "dependencies": {}
 }

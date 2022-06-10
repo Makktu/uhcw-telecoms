@@ -466,12 +466,6 @@ function presentAlertPrompt() {
     return alert.present();
 }
 
-window.onload = function () {
-    setTimeout(function () {
-        window.scrollTo(0, 1);
-    }, 0);
-};
-
 let firstUp = false;
 if (!firstUp) firstRun();
 

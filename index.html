@@ -5,7 +5,7 @@
         <style type="text/css">
             :root {
                 /* Set the background of the entire app */
-                /* --ion-background-color: #394646; */
+                --ion-background-color: #f4fbfb;
                 /* --ion-color: #e5ecec; */
 
                 /* Set the font family of the entire app */
@@ -19,11 +19,17 @@
                 text-align: right;
             }
 
-            /* ion-card {
-                background-color: rgb(151, 173, 147);
+            .headers {
+                color: white;
+                font-size: 2rem;
             }
 
-            ion-label {
+            ion-card,
+            ion-input {
+                background-color: #3880ff;
+            }
+
+            /* ion-label {
                 background-color: rgb(246, 248, 245);
             } */
 
@@ -91,16 +97,21 @@
                             <ion-card>
                                 <ion-card-header>
                                     <ion-card-title>
-                                        <ion-icon
+                                        <!-- <ion-icon
                                             name="call-outline"
-                                        ></ion-icon>
-                                        Switchboard
+                                        ></ion-icon> -->
+                                        <div class="headers">
+                                            <ion-icon
+                                                name="call-outline"
+                                            ></ion-icon>
+                                            Switchboard
+                                        </div>
                                     </ion-card-title>
                                 </ion-card-header>
                                 <ion-card-content>
                                     <ion-item>
                                         <ion-label position="floating"
-                                            >Search Here For Any Dept</ion-label
+                                            >Search For Phone Numbers</ion-label
                                         >
                                         <ion-input
                                             type="text"
@@ -109,7 +120,6 @@
                                     </ion-item>
                                     <div class="ion-text-right">
                                         <ion-button
-                                            fill="outline"
                                             color="danger"
                                             id="btn-phone-cancel"
                                             ><ion-icon
@@ -135,16 +145,18 @@
                             <ion-card>
                                 <ion-card-header>
                                     <ion-card-title>
-                                        <ion-icon
-                                            name="locate-outline"
-                                        ></ion-icon>
-                                        Helpdesk
+                                        <div class="headers">
+                                            <ion-icon
+                                                name="locate-outline"
+                                            ></ion-icon>
+                                            Helpdesk
+                                        </div>
                                     </ion-card-title>
                                 </ion-card-header>
                                 <ion-card-content>
                                     <ion-item>
                                         <ion-label position="floating"
-                                            >Search by Room Number</ion-label
+                                            >Search For Room Number</ion-label
                                         >
                                         <ion-input
                                             type="text"
@@ -153,7 +165,6 @@
                                     </ion-item>
                                     <div class="ion-text-right">
                                         <ion-button
-                                            fill="outline"
                                             color="danger"
                                             id="btn-room-cancel"
                                             ><ion-icon
@@ -181,11 +192,14 @@
 
                     <ion-col>
                         <div class="ion-text-center">
-                            Development version 0.4.1
-                            <br /><br />
-                            THIS APP IS NOT AN OFFICIAL PRODUCT OF ISS OR NHS
+                            <ion-text color="primary">
+                                <h3>
+                                    THIS APP IS NOT AN OFFICIAL PRODUCT OF ISS
+                                    OR NHS
+                                </h3>
+                            </ion-text>
 
-                            <br /><br /><a
+                            <a
                                 href="https://www.figma.com/proto/SSQWbRJUFlf0eBMC2lIVV4/Tutorial?page-id=0%3A1&node-id=0%3A1&viewport=398%2C317%2C1&scaling=scale-down&starting-point-node-id=2%3A5"
                                 target="_blank"
                                 >View Final Product Demo</a
@@ -193,7 +207,8 @@
                             <br />(opens new browser window)<br /><br />
                             Created by John McNamara
 
-                            <br />enquiries: johnmcna@gmail.com
+                            <br />enquiries: johnmcna@gmail.com<br /><br />
+                            Dev v0.4.1
                         </div>
                     </ion-col>
                 </ion-grid>
