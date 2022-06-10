@@ -32,6 +32,80 @@ const switchMsgArea = document.querySelector("#all-numbers");
 
 // *********** GETTING THE JSON DATA ***********
 
+function conceptEasterEgg() {
+    const alert = document.createElement("ion-alert");
+    alert.cssClass = "my-custom-class";
+    alert.header = "New Task";
+    alert.inputs = [
+        {
+            placeholder: "NAME",
+        },
+        {
+            name: "name2",
+            id: "name2-id",
+            value: "Extension",
+            placeholder: "Extension",
+        },
+        // multiline input.
+        {
+            name: "paragraph",
+            id: "paragraph",
+            type: "textarea",
+            placeholder: "Placeholder 3",
+        },
+        {
+            name: "name3",
+            value: "TASK DETAILS",
+            type: "url",
+            placeholder: "Favorite site ever",
+        },
+        // input date without min nor max
+        {
+            name: "name5",
+            type: "date",
+        },
+        {
+            name: "name6",
+            type: "number",
+            min: -5,
+            max: 10,
+        },
+        {
+            name: "name7",
+            type: "number",
+        },
+        {
+            name: "name8",
+            type: "password",
+            placeholder: "Advanced Attributes",
+            cssClass: "specialClass",
+            attributes: {
+                maxlength: 4,
+                inputmode: "decimal",
+            },
+        },
+    ];
+    alert.buttons = [
+        {
+            text: "Cancel",
+            role: "cancel",
+            cssClass: "secondary",
+            handler: () => {
+                console.log("Confirm Cancel");
+            },
+        },
+        {
+            text: "Ok",
+            handler: () => {
+                console.log("Confirm Ok");
+            },
+        },
+    ];
+
+    document.body.appendChild(alert);
+    return alert.present();
+}
+
 function firstRun() {
     let firstMessage = `🙋🏽‍♀️ Welcome to the unofficial app of Switchboard and Helpdesk at UHCW.<br>➡️ Search for any ward, department or telephone number.<br>➡️ Perform 'reverse lookup' of any phone number to check which Department it is from.<br>👷🏽‍♂️ This app is under active development and is not yet feature-complete.<br>🔗 Tap the link at the bottom of the page for a preview of how it will look and work when finished!<br>❗Please be aware that information contained in this app may be incomplete, and is subject to change at short notice.`;
     displayBox(firstMessage);
@@ -180,6 +254,10 @@ function testConvert(ext) {
 }
 
 function showOutcome(searchPhrase) {
+    if (searchPhrase.toUpperCase() == "CONCEPT") {
+        conceptEasterEgg();
+        return;
+    }
     // resArr = [];
     searchPhrase = searchPhrase.toUpperCase();
 
