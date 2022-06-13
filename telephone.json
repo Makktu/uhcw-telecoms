@@ -1,5 +1,41 @@
 [
     {
+        "OUTPATIENTS CLINIC 1": {
+            "RECEPTION": [12345],
+            "OTHER NUMBER": [25735]
+        },
+        "OUTPATIENTS CLINIC 2": {
+            "RECEPTION": [12345],
+            "OTHER NUMBER": [25735]
+        },
+        "OUTPATIENTS CLINIC 3": {
+            "RECEPTION": [12345],
+            "OTHER NUMBER": [25735]
+        },
+        "OUTPATIENTS CLINIC 4": {
+            "RECEPTION": [12345],
+            "OTHER NUMBER": [25735]
+        },
+        "OUTPATIENTS CLINIC 5": {
+            "RECEPTION": [12345],
+            "OTHER NUMBER": [25735]
+        },
+        "OUTPATIENTS CLINIC 6": {
+            "RECEPTION": [12345],
+            "OTHER NUMBER": [25735]
+        },
+        "OUTPATIENTS CLINIC 7": {
+            "RECEPTION": [12345],
+            "OTHER NUMBER": [25735]
+        },
+        "OUTPATIENTS CLINIC 8": {
+            "RECEPTION": [12345],
+            "OTHER NUMBER": [25735]
+        },
+        "OUTPATIENTS CLINIC 9": {
+            "RECEPTION": [12345],
+            "OTHER NUMBER": [25735]
+        },
         "WARD 1": {
             "AREA 1": [25738, 28218],
             "AREA 2": [25735],

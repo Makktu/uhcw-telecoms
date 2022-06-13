@@ -33,61 +33,57 @@ const switchMsgArea = document.querySelector("#all-numbers");
 // *********** GETTING THE JSON DATA ***********
 
 function conceptEasterEgg() {
+    let conceptDate = new Date() + "";
     const alert = document.createElement("ion-alert");
     alert.cssClass = "my-custom-class";
     alert.header = "New Task";
     alert.inputs = [
         {
             placeholder: "NAME",
+            value: "NAME",
         },
         {
             name: "name2",
             id: "name2-id",
-            value: "Extension",
-            placeholder: "Extension",
+            value: "EXTENSION",
+            placeholder: "EXTENSION",
         },
         // multiline input.
         {
             name: "paragraph",
             id: "paragraph",
+            value: "FROM LOCATION",
             type: "textarea",
-            placeholder: "Placeholder 3",
+            placeholder: "FROM LOCATION",
+        },
+        {
+            name: "paragraph",
+            value: "TO LOCATION",
+            id: "paragraph",
+            type: "textarea",
+            placeholder: "TO LOCATION",
         },
         {
             name: "name3",
             value: "TASK DETAILS",
-            type: "url",
-            placeholder: "Favorite site ever",
+            type: "textarea",
+            placeholder: "",
+        },
+        {
+            name: "name3",
+            value: "CONTRACT",
+            type: "textarea",
+            placeholder: "",
         },
         // input date without min nor max
         {
-            name: "name5",
-            type: "date",
-        },
-        {
-            name: "name6",
-            type: "number",
-            min: -5,
-            max: 10,
-        },
-        {
-            name: "name7",
-            type: "number",
-        },
-        {
-            name: "name8",
-            type: "password",
-            placeholder: "Advanced Attributes",
-            cssClass: "specialClass",
-            attributes: {
-                maxlength: 4,
-                inputmode: "decimal",
-            },
+            name: "name3",
+            value: `${conceptDate.slice(0, 25)}`,
         },
     ];
     alert.buttons = [
         {
-            text: "Cancel",
+            text: "CANCEL",
             role: "cancel",
             cssClass: "secondary",
             handler: () => {
@@ -95,9 +91,9 @@ function conceptEasterEgg() {
             },
         },
         {
-            text: "Ok",
+            text: "SAVE",
             handler: () => {
-                console.log("Confirm Ok");
+                console.log("Confirm SAVE");
             },
         },
     ];
@@ -205,12 +201,14 @@ function telephoneSearch(searchPhrase) {
         message = "";
         if (typeof telNums[`${searchPhrase}`] == "object") {
             promising = Object.keys(telNums[`${searchPhrase}`]);
-            // message += `${searchPhrase}<br>`;
-            // if (theWard.length > 18) theWard = theWard.slice(0, 17);
+            console.log("GGG", promising);
             message += `<div id="phone-results-header"><br><strong>${theWard}</strong></div>`;
             numberToCall = "";
             console.log("👷🏽‍♂️", promising);
             allNumbersToCall = [];
+            // ******************
+            // ***** HERE *******
+            // ******************
             for (let entry of promising) {
                 console.log(">>>>>>>>", entry);
 
@@ -242,7 +240,7 @@ function telephoneSearch(searchPhrase) {
             }
         }
         foundWard = [];
-        displayBox(message, numberToCall);
+        displayBox(message, numberToCall, promising);
     }
 }
 
@@ -311,10 +309,13 @@ function createAllResults(resArr) {
 }
 
 function displayAllNumbers(allNumbersToCall) {
+    console.log(promising);
     const alert = document.createElement("ion-alert");
     alert.cssClass = "my-custom-class";
-    alert.header = "CHOOSE NUMBER";
+    alert.header = `CHOOSE ${theWard} NUMBER`;
     let allAlerts = [];
+    let deptCount = 0;
+    let anotherNum = 0;
     for (let number of allNumbersToCall) {
         allAlerts.push({
             text: `📲 CALL ${number} NOW`,
@@ -391,7 +392,7 @@ function displayBox(html, numberToCall) {
                 cssClass: "secondary",
                 id: "show-all-button",
                 handler: () => {
-                    displayAllNumbers(allNumbersToCall);
+                    displayAllNumbers(allNumbersToCall, promising);
                 },
             },
             {
