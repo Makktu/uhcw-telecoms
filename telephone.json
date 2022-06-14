@@ -175,9 +175,9 @@
             "ECU": [25381, 25382]
         },
         "WARD 34": {
-            "HAEMOTOLOGY": [25390],
-            "HAEMOTOLOGY DAY UNIT": [25490, 25491],
-            "HAEMOTOLOGY CLINIC": [28242],
+            "HAEMATOLOGY": [25390],
+            "HAEMATOLOGY DAY UNIT": [25490, 25491],
+            "HAEMATOLOGY CLINIC": [28242],
             "AREA 2": [25386],
             "AREA 4": [26114]
         },
@@ -241,6 +241,14 @@
         "PORTERS": {
             "PORTER MANAGER": [27413],
             "PORTER DISPATCH": [25035]
+        },
+        "KITCHEN": {
+            "AG1 FM VILLAGE": [24981],
+            "AG5 THE MALL": [25828]
+        },
+        "WOMEN AND CHILDREN'S RECEPTION": {
+            "MATERNITY RECEPTION": [56789],
+            "OTHER NUMBER": [23456]
         }
     }
 ]
