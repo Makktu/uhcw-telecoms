@@ -103,7 +103,7 @@ function conceptEasterEgg() {
 }
 
 function firstRun() {
-    let firstMessage = `🙋🏽‍♀️ Welcome to the unofficial app of Switchboard and Helpdesk at UHCW.<br>➡️ Search for any ward, department or telephone number.<br>➡️ Perform 'reverse lookup' of any phone number to check which Department it is from.<br>👷🏽‍♂️ This app is under active development and is not yet feature-complete.<br>🔗 Tap the link at the bottom of the page for a preview of how it will look and work when finished!<br>❗Please be aware that information contained in this app may be incomplete, and is subject to change at short notice.`;
+    let firstMessage = `🙋🏽‍♀️ Welcome to the unofficial app of Switchboard and Helpdesk at UHCW.<br>➡️ SWITCHBOARD: Full or partial search for any ward, department or telephone number. <br>▶ <strong>E.g. A search for '22' will find all Ward 22 numbers; search for 'ED' will find all Emergency Dept numbers.</strong><br>➡️ Perform 'reverse lookup' of any phone number to check which Department it is from.<br>▶ <strong>E.g. A search for '27777' will reveal that it is located on Renal Dialysis.</strong><br>➡️ HELPDESK: full or partial search for locations by name or room number.<br>▶️ <strong>E.g. searching 'security' will find the location and room number of the Security office in The Mall; searching 'abr1' will show that those room numbers are on Ward 15.</strong><br>👷🏽‍♂️ This app is under active development and is not yet feature-complete.<br>🔗 Tap the link at the bottom of the page for a preview of how it will look and work when finished!<br>❗Please be aware that information contained in this app may be incomplete, and is subject to change at short notice.`;
     displayBox(firstMessage);
 }
 
