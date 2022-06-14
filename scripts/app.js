@@ -184,6 +184,16 @@ function telephoneSearch(searchPhrase) {
         return;
     }
     searchPhrase = searchPhrase.toUpperCase();
+    if (
+        searchPhrase == "ED" ||
+        searchPhrase == "A AND E" ||
+        searchPhrase == "A&E"
+    ) {
+        searchPhrase = "EMERGENCY";
+    }
+    if (searchPhrase == "MDU") {
+        searchPhrase = "WARD 2 MDU";
+    }
     for (let entry of topKeys) {
         if (entry.includes(searchPhrase)) {
             foundWard.push(entry);
@@ -439,6 +449,19 @@ const clearFields = function () {
     phoneInput.value = "";
     roomInput.value = "";
 };
+
+function checkInput(searchPhrase) {
+    console.log(searchPhrase);
+    if (
+        searchPhrase == "ED" ||
+        searchPhrase == "A AND E" ||
+        searchPhrase == "A&E"
+    ) {
+        searchPhrase = "EMERGENCY";
+    }
+    console.log(searchPhrase);
+    return searchPhrase;
+}
 
 phoneConfirmBtn.addEventListener("click", () => {
     if (phoneInput.value) {
