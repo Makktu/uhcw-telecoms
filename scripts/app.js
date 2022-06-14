@@ -309,21 +309,46 @@ function createAllResults(resArr) {
 }
 
 function displayAllNumbers(allNumbersToCall) {
-    console.log(promising);
+    // console.log(telNums[theWard][promising]);
     const alert = document.createElement("ion-alert");
     alert.cssClass = "my-custom-class";
-    alert.header = `CHOOSE ${theWard} NUMBER`;
+    alert.header = `ALL ${theWard} NUMBERS`;
     let allAlerts = [];
-    let deptCount = 0;
-    let anotherNum = 0;
-    for (let number of allNumbersToCall) {
+    for (let area of promising) {
         allAlerts.push({
-            text: `📲 CALL ${number} NOW`,
+            text: `📲 ${area} ${telNums[theWard][area][0]}`,
             id: "ok-button",
             handler: () => {
-                callNumber(number);
+                callNumber(telNums[theWard][area][0]);
             },
         });
+        if (telNums[theWard][area][1]) {
+            allAlerts.push({
+                text: `📲 ${area} ${telNums[theWard][area][1]}`,
+                id: "ok-button",
+                handler: () => {
+                    callNumber(telNums[theWard][area][1]);
+                },
+            });
+        }
+        if (telNums[theWard][area][2]) {
+            allAlerts.push({
+                text: `📲 ${area} ${telNums[theWard][area][2]}`,
+                id: "ok-button",
+                handler: () => {
+                    callNumber(telNums[theWard][area][2]);
+                },
+            });
+        }
+        if (telNums[theWard][area][3]) {
+            allAlerts.push({
+                text: `📲 ${area} ${telNums[theWard][area][3]}`,
+                id: "ok-button",
+                handler: () => {
+                    callNumber(telNums[theWard][area][3]);
+                },
+            });
+        }
     }
     allAlerts.push({
         text: "❌ CLOSE",
@@ -387,7 +412,7 @@ function displayBox(html, numberToCall) {
                 },
             },
             {
-                text: "📃PICK OTHER NUMBER",
+                text: "📝 CALL OTHER EXTENSION",
                 // role: "cancel",
                 cssClass: "secondary",
                 id: "show-all-button",
