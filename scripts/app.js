@@ -184,6 +184,14 @@ function telephoneSearch(searchPhrase) {
         return;
     }
     searchPhrase = searchPhrase.toUpperCase();
+    console.log(searchPhrase);
+    // if (searchPhrase == "W2") searchPhrase = "WARD 2";
+    // if (searchPhrase.length < 4 && searchPhrase.slice(0, 1) == "W") {
+    //     let subSearch = searchPhrase.slice(1);
+    //     console.log(subSearch);
+    //     searchPhrase = "WARD " + subSearch;
+    //     console.log(searchPhrase);
+    // }
     if (
         searchPhrase == "ED" ||
         searchPhrase == "A AND E" ||
@@ -322,11 +330,11 @@ function displayAllNumbers(allNumbersToCall) {
     // console.log(telNums[theWard][promising]);
     const alert = document.createElement("ion-alert");
     alert.cssClass = "my-custom-class";
-    alert.header = `ALL ${theWard} NUMBERS`;
+    alert.header = `CALL ${theWard}`;
     let allAlerts = [];
     for (let area of promising) {
         allAlerts.push({
-            text: `📲 ${area} ${telNums[theWard][area][0]}`,
+            text: `☎️ ${area} ${telNums[theWard][area][0]}`,
             id: "ok-button",
             handler: () => {
                 callNumber(telNums[theWard][area][0]);
@@ -334,7 +342,7 @@ function displayAllNumbers(allNumbersToCall) {
         });
         if (telNums[theWard][area][1]) {
             allAlerts.push({
-                text: `📲 ${area} ${telNums[theWard][area][1]}`,
+                text: `☎️ ${area} ${telNums[theWard][area][1]}`,
                 id: "ok-button",
                 handler: () => {
                     callNumber(telNums[theWard][area][1]);
@@ -343,7 +351,7 @@ function displayAllNumbers(allNumbersToCall) {
         }
         if (telNums[theWard][area][2]) {
             allAlerts.push({
-                text: `📲 ${area} ${telNums[theWard][area][2]}`,
+                text: `☎️ ${area} ${telNums[theWard][area][2]}`,
                 id: "ok-button",
                 handler: () => {
                     callNumber(telNums[theWard][area][2]);
@@ -352,7 +360,7 @@ function displayAllNumbers(allNumbersToCall) {
         }
         if (telNums[theWard][area][3]) {
             allAlerts.push({
-                text: `📲 ${area} ${telNums[theWard][area][3]}`,
+                text: `☎️ ${area} ${telNums[theWard][area][3]}`,
                 id: "ok-button",
                 handler: () => {
                     callNumber(telNums[theWard][area][3]);
@@ -409,40 +417,41 @@ function displayBox(html, numberToCall) {
             },
         ];
         roomSearch = false;
+        document.body.appendChild(alertControl);
+        alertControl.present();
     }
 
     if (phoneSearch) {
-        alertControl.buttons = [
-            {
-                text: `📲 CALL ${numberToCall} NOW`,
-                cssClass: "secondary",
-                id: "call-button",
-                handler: () => {
-                    callNumber(numberToCall);
-                },
-            },
-            {
-                text: "📝 CALL OTHER EXTENSION",
-                // role: "cancel",
-                cssClass: "secondary",
-                id: "show-all-button",
-                handler: () => {
-                    displayAllNumbers(allNumbersToCall, promising);
-                },
-            },
-            {
-                text: "❌ CLOSE",
-                id: "close-button",
-                // handler: () => {
-                //     console.log("Confirm Okay");
-                // },
-            },
-        ];
-        phoneSearch = false;
+        displayAllNumbers(allNumbersToCall, promising);
+        //     alertControl.buttons = [
+        //         {
+        //             text: `📲 CALL ${numberToCall} NOW`,
+        //             cssClass: "secondary",
+        //             id: "call-button",
+        //             handler: () => {
+        //                 callNumber(numberToCall);
+        //             },
+        //         },
+        //         {
+        //             text: "📝 CALL OTHER EXTENSION",
+        //             // role: "cancel",
+        //             cssClass: "secondary",
+        //             id: "show-all-button",
+        //             handler: () => {
+        //                 displayAllNumbers(allNumbersToCall, promising);
+        //             },
+        //         },
+        //         {
+        //             text: "❌ CLOSE",
+        //             id: "close-button",
+        //             // handler: () => {
+        //             //     console.log("Confirm Okay");
+        //             // },
+        //         },
+        //     ];
+        //     phoneSearch = false;
+        // }
     }
-
-    document.body.appendChild(alertControl);
-    alertControl.present();
 }
 
 const clearFields = function () {
