@@ -75,6 +75,46 @@
             href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
         />
         <!-- ^^^^^^^ ionic CDN links -->
+        <script>
+            if ("serviceWorker" in navigator) {
+                window.addEventListener("load", function () {
+                    navigator.serviceWorker
+                        .register("service-worker.js")
+                        .then(
+                            function (registration) {
+                                // Registration was successful
+                                console.log("Registered!");
+                            },
+                            function (err) {
+                                // registration failed :(
+                                console.log(
+                                    "ServiceWorker registration failed: ",
+                                    err
+                                );
+                            }
+                        )
+                        .catch(function (err) {
+                            console.log(err);
+                        });
+                });
+            } else {
+                console.log("service worker is not supported");
+            }
+
+            // window.addEventListener("beforeinstallprompt", (e) => {
+            //     console.log("beforeinstallprompt Event fired");
+            //     e.preventDefault();
+            //     // Stash the event so it can be triggered later.
+            //     this.deferredPrompt = e;
+            //     return false;
+            // });
+            // // When you want to trigger prompt:
+            // this.deferredPrompt.prompt();
+            // this.deferredPrompt.userChoice.then((choice) => {
+            //     console.log(choice);
+            // });
+            // this.deferredPrompt = null;
+        </script>
         <title>UHCW Telecoms App</title>
     </head>
     <body>
