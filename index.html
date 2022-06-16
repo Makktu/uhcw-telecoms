@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <link rel="manifest" href="manifest.json" />
+
         <!-- STYLES -->
         <style type="text/css">
             :root {
@@ -118,149 +120,151 @@
         <title>UHCW Telecoms App</title>
     </head>
     <body>
-        <!-- <ion-app
+        <main>
+            <!-- <ion-app
             style="
                 --ion-background-color: rgb(255, 255, 255);
                 --ion-text-color: rgb(6, 6, 6);
             "
         > -->
-        <ion-app>
-            <ion-header>
-                <ion-toolbar color="primary">
-                    <ion-title style="font-size: 1.25rem"
-                        >UHCW Telecoms</ion-title
-                    >
-                </ion-toolbar>
-            </ion-header>
-            <!-- HEAD ABOVE, BODY BELOW -->
-            <ion-content>
-                <ion-grid>
-                    <!-- <ion-modal id="control-modal"></ion-modal> -->
-                    <ion-row>
-                        <ion-col size-md="6" offset-md="3">
-                            <ion-card>
-                                <ion-card-header>
-                                    <ion-card-title>
-                                        <!-- <ion-icon
+            <ion-app>
+                <ion-header>
+                    <ion-toolbar color="primary">
+                        <ion-title style="font-size: 1.25rem"
+                            >UHCW Telecoms</ion-title
+                        >
+                    </ion-toolbar>
+                </ion-header>
+                <!-- HEAD ABOVE, BODY BELOW -->
+                <ion-content>
+                    <ion-grid>
+                        <!-- <ion-modal id="control-modal"></ion-modal> -->
+                        <ion-row>
+                            <ion-col size-md="6" offset-md="3">
+                                <ion-card>
+                                    <ion-card-header>
+                                        <ion-card-title>
+                                            <!-- <ion-icon
                                             name="call-outline"
                                         ></ion-icon> -->
-                                        <div class="headers">
-                                            <ion-icon
-                                                name="call-outline"
-                                            ></ion-icon>
-                                            Switchboard
+                                            <div class="headers">
+                                                <ion-icon
+                                                    name="call-outline"
+                                                ></ion-icon>
+                                                Switchboard
+                                            </div>
+                                        </ion-card-title>
+                                    </ion-card-header>
+                                    <ion-card-content>
+                                        <ion-item>
+                                            <ion-label position="floating"
+                                                >Search Ward or Dept.</ion-label
+                                            >
+                                            <ion-input
+                                                type="text"
+                                                id="input-phone"
+                                            ></ion-input>
+                                        </ion-item>
+                                        <div class="ion-text-right">
+                                            <ion-button
+                                                color="danger"
+                                                id="btn-phone-cancel"
+                                                ><ion-icon
+                                                    slot="start"
+                                                    name="close-outline"
+                                                ></ion-icon
+                                                >Cancel</ion-button
+                                            >
+                                            <ion-button
+                                                color="success"
+                                                id="btn-phone-confirm"
+                                                ><ion-icon
+                                                    slot="start"
+                                                    name="add-circle-outline"
+                                                ></ion-icon
+                                                >Search</ion-button
+                                            >
                                         </div>
-                                    </ion-card-title>
-                                </ion-card-header>
-                                <ion-card-content>
-                                    <ion-item>
-                                        <ion-label position="floating"
-                                            >Search Ward or Dept.</ion-label
-                                        >
-                                        <ion-input
-                                            type="text"
-                                            id="input-phone"
-                                        ></ion-input>
-                                    </ion-item>
-                                    <div class="ion-text-right">
-                                        <ion-button
-                                            color="danger"
-                                            id="btn-phone-cancel"
-                                            ><ion-icon
-                                                slot="start"
-                                                name="close-outline"
-                                            ></ion-icon
-                                            >Cancel</ion-button
-                                        >
-                                        <ion-button
-                                            color="success"
-                                            id="btn-phone-confirm"
-                                            ><ion-icon
-                                                slot="start"
-                                                name="add-circle-outline"
-                                            ></ion-icon
-                                            >Search</ion-button
-                                        >
-                                    </div>
-                                </ion-card-content>
-                            </ion-card>
-                            <div id="all-numbers"></div>
+                                    </ion-card-content>
+                                </ion-card>
+                                <div id="all-numbers"></div>
 
-                            <ion-card>
-                                <ion-card-header>
-                                    <ion-card-title>
-                                        <div class="headers">
-                                            <ion-icon
-                                                name="locate-outline"
-                                            ></ion-icon>
-                                            Helpdesk
+                                <ion-card>
+                                    <ion-card-header>
+                                        <ion-card-title>
+                                            <div class="headers">
+                                                <ion-icon
+                                                    name="locate-outline"
+                                                ></ion-icon>
+                                                Helpdesk
+                                            </div>
+                                        </ion-card-title>
+                                    </ion-card-header>
+                                    <ion-card-content>
+                                        <ion-item>
+                                            <ion-label position="floating"
+                                                >Search Dept Name/Room
+                                                Number</ion-label
+                                            >
+                                            <ion-input
+                                                type="text"
+                                                id="input-room"
+                                            ></ion-input>
+                                        </ion-item>
+                                        <div class="ion-text-right">
+                                            <ion-button
+                                                color="danger"
+                                                id="btn-room-cancel"
+                                                ><ion-icon
+                                                    slot="start"
+                                                    name="close-outline"
+                                                ></ion-icon
+                                                >Cancel</ion-button
+                                            >
+                                            <ion-button
+                                                color="success"
+                                                id="btn-room-confirm"
+                                                ><ion-icon
+                                                    slot="start"
+                                                    name="add-circle-outline"
+                                                ></ion-icon
+                                                >Search</ion-button
+                                            >
                                         </div>
-                                    </ion-card-title>
-                                </ion-card-header>
-                                <ion-card-content>
-                                    <ion-item>
-                                        <ion-label position="floating"
-                                            >Search Dept Name/Room
-                                            Number</ion-label
-                                        >
-                                        <ion-input
-                                            type="text"
-                                            id="input-room"
-                                        ></ion-input>
-                                    </ion-item>
-                                    <div class="ion-text-right">
-                                        <ion-button
-                                            color="danger"
-                                            id="btn-room-cancel"
-                                            ><ion-icon
-                                                slot="start"
-                                                name="close-outline"
-                                            ></ion-icon
-                                            >Cancel</ion-button
-                                        >
-                                        <ion-button
-                                            color="success"
-                                            id="btn-room-confirm"
-                                            ><ion-icon
-                                                slot="start"
-                                                name="add-circle-outline"
-                                            ></ion-icon
-                                            >Search</ion-button
-                                        >
-                                    </div>
-                                </ion-card-content>
-                            </ion-card>
-                            <!-- Animated Searchbar -->
+                                    </ion-card-content>
+                                </ion-card>
+                                <!-- Animated Searchbar -->
+                            </ion-col>
+                        </ion-row>
+                        <div id="all-rooms"></div>
+
+                        <ion-col>
+                            <div class="ion-text-center">
+                                <a
+                                    href="https://www.figma.com/proto/SSQWbRJUFlf0eBMC2lIVV4/Tutorial?page-id=0%3A1&node-id=0%3A1&viewport=398%2C317%2C1&scaling=scale-down&starting-point-node-id=2%3A5"
+                                    target="_blank"
+                                    >View Final Product Demo</a
+                                >
+                                <br />(opens new browser window)<br />
+                                <ion-text color="dark">
+                                    <h6>
+                                        This app is not an official product<br />of
+                                        ISS or the NHS
+                                    </h6>
+                                </ion-text>
+                                <footer>
+                                    Created by John McNamara
+
+                                    <br />enquiries: johnmcna@gmail.com<br /><br />
+                                    Development version 0.6.1
+                                </footer>
+                            </div>
                         </ion-col>
-                    </ion-row>
-                    <div id="all-rooms"></div>
-
-                    <ion-col>
-                        <div class="ion-text-center">
-                            <a
-                                href="https://www.figma.com/proto/SSQWbRJUFlf0eBMC2lIVV4/Tutorial?page-id=0%3A1&node-id=0%3A1&viewport=398%2C317%2C1&scaling=scale-down&starting-point-node-id=2%3A5"
-                                target="_blank"
-                                >View Final Product Demo</a
-                            >
-                            <br />(opens new browser window)<br />
-                            <ion-text color="dark">
-                                <h6>
-                                    This app is not an official product<br />of
-                                    ISS or the NHS
-                                </h6>
-                            </ion-text>
-                            <footer>
-                                Created by John McNamara
-
-                                <br />enquiries: johnmcna@gmail.com<br /><br />
-                                Development version 0.6.1
-                            </footer>
-                        </div>
-                    </ion-col>
-                </ion-grid>
-            </ion-content>
-            <ion-alert-controller></ion-alert-controller>
-        </ion-app>
+                    </ion-grid>
+                </ion-content>
+                <ion-alert-controller></ion-alert-controller>
+            </ion-app>
+        </main>
         <script defer type="module" src="scripts/app.js"></script>
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.2/sql-wasm.js"
