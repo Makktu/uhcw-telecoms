@@ -9,7 +9,7 @@
         },
         {
             "src": "./assets/big-hospital.png",
-            "sizes": "720x",
+            "sizes": "512x512",
             "type": "image/png"
         }
     ],
