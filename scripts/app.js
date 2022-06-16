@@ -184,7 +184,7 @@ function telephoneSearch(searchPhrase) {
         return;
     }
     searchPhrase = searchPhrase.toUpperCase();
-    console.log(searchPhrase);
+    console.log(searchPhrase, foundWard, foundWard.length);
     // if (searchPhrase == "W2") searchPhrase = "WARD 2";
     // if (searchPhrase.length < 4 && searchPhrase.slice(0, 1) == "W") {
     //     let subSearch = searchPhrase.slice(1);
@@ -211,7 +211,20 @@ function telephoneSearch(searchPhrase) {
     if (foundWard.length == 0) {
         roomSearch = false;
         phoneSearch = false;
-        displayBox("❌ Nothing found. Check spelling and try again.");
+        alertControl.message =
+            "❌ Nothing found. Check spelling and try again.";
+        alertControl.header = `☎️ UHCW Telecoms 🗺️`;
+        alertControl.buttons = [
+            {
+                text: "OK",
+                id: "ok-button",
+                // handler: () => {
+                //     console.log("Confirm Okay");
+                // },
+            },
+        ];
+        document.body.appendChild(alertControl);
+        alertControl.present();
         return;
     }
     if (foundWard) {
