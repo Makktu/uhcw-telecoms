@@ -125,8 +125,7 @@ readTextFile("./switchdesk1.json", function (text) {
         (acc, entry) => acc.concat(Object.values(entry)),
         []
     );
-    if (allData[0]["Wing"]) console.log("✅ DATA LOADED OK");
-    dataLoaded = true;
+    if (allData[0]["Wing"]) dataLoaded = true;
 });
 
 readTextFile("./telephone.json", function (text) {
@@ -138,18 +137,10 @@ readTextFile("./telephone.json", function (text) {
 
 // *************************************
 
-function testOther(msg) {
-    console.log(msg);
-}
-
 function callNumber(numberToCall) {
-    console.log("!!!!", numberToCall);
     numberToCall += "";
     numberToCall = testConvert(numberToCall);
-
-    console.log("CONVERTED TO:", numberToCall);
     window.open(`tel:${numberToCall}`);
-
     numberToCall = "";
 }
 
@@ -184,14 +175,6 @@ function telephoneSearch(searchPhrase) {
         return;
     }
     searchPhrase = searchPhrase.toUpperCase();
-    console.log(searchPhrase, foundWard, foundWard.length);
-    // if (searchPhrase == "W2") searchPhrase = "WARD 2";
-    // if (searchPhrase.length < 4 && searchPhrase.slice(0, 1) == "W") {
-    //     let subSearch = searchPhrase.slice(1);
-    //     console.log(subSearch);
-    //     searchPhrase = "WARD " + subSearch;
-    //     console.log(searchPhrase);
-    // }
     if (
         searchPhrase == "ED" ||
         searchPhrase == "A AND E" ||
@@ -201,6 +184,37 @@ function telephoneSearch(searchPhrase) {
     }
     if (searchPhrase == "MDU") {
         searchPhrase = "WARD 2 MDU";
+    }
+    if (searchPhrase == "2") {
+        searchPhrase = "WARD 2";
+    }
+    if (searchPhrase == "3") {
+        searchPhrase = "WARD 3";
+    }
+    if (searchPhrase == "1") {
+        searchPhrase = "WARD 1";
+    }
+    if (searchPhrase == "10") {
+        searchPhrase = "WARD 10";
+    }
+    if (searchPhrase == "11") {
+        searchPhrase = "WARD 11";
+    }
+    if (searchPhrase.includes("OUT") || searchPhrase.includes("OPD")) {
+        alertControl.message = `<strong>Looking for an Outpatients Clinic?</strong><br><br>Try searching <strong>by its number</strong><br><br>E.g., "OPD 9" or "OPD 3", etc.`;
+        alertControl.header = `☎️ UHCW Telecoms 🗺️`;
+        alertControl.buttons = [
+            {
+                text: "OK",
+                id: "ok-button",
+                // handler: () => {
+                //     console.log("Confirm Okay");
+                // },
+            },
+        ];
+        document.body.appendChild(alertControl);
+        alertControl.present();
+        return;
     }
     for (let entry of topKeys) {
         if (entry.includes(searchPhrase)) {
@@ -232,18 +246,13 @@ function telephoneSearch(searchPhrase) {
         message = "";
         if (typeof telNums[`${searchPhrase}`] == "object") {
             promising = Object.keys(telNums[`${searchPhrase}`]);
-            console.log("GGG", promising);
             message += `<div id="phone-results-header"><br><strong>${theWard}</strong></div>`;
             numberToCall = "";
-            console.log("👷🏽‍♂️", promising);
             allNumbersToCall = [];
             // ******************
             // ***** HERE *******
             // ******************
             for (let entry of promising) {
-                console.log(">>>>>>>>", entry);
-
-                console.log(telNums[searchPhrase][entry][0]);
                 if (!numberToCall) {
                     numberToCall = telNums[searchPhrase][entry][0];
                 }
@@ -262,14 +271,8 @@ function telephoneSearch(searchPhrase) {
                     allNumbersToCall.push(telNums[searchPhrase][entry][3]);
                 }
             }
-            console.log("======", allNumbersToCall);
         }
-        if (foundWard.length > 1) {
-            console.log("MORE???");
-            for (let multiple of foundWard) {
-                console.log(multiple);
-            }
-        }
+
         foundWard = [];
         displayBox(message, numberToCall, promising);
     }
@@ -321,7 +324,6 @@ function showOutcome(searchPhrase) {
     } else {
         if (resArr.length > 1 && !showAll) {
             html = `Showing 1 result of ${resArr.length}:<br>${resArr[0]["Room Num"]}<br>${resArr[0]["Description"]}<br>${resArr[0]["Department"]}<br>${resArr[0]["Wing"]}`;
-            console.log(html);
         } else {
             html = `Showing 1 result:<br>${resArr[0]["Room Num"]}<br>${resArr[0]["Description"]}<br>${resArr[0]["Department"]}<br>${resArr[0]["Wing"]}`;
         }
@@ -340,7 +342,6 @@ function createAllResults(resArr) {
 }
 
 function displayAllNumbers(allNumbersToCall) {
-    // console.log(telNums[theWard][promising]);
     const alert = document.createElement("ion-alert");
     alert.cssClass = "my-custom-class";
     alert.header = `CALL ${theWard}`;
@@ -435,6 +436,7 @@ function displayBox(html, numberToCall) {
     }
 
     if (phoneSearch) {
+        phoneSearch = false;
         displayAllNumbers(allNumbersToCall, promising);
         //     alertControl.buttons = [
         //         {
@@ -473,7 +475,6 @@ const clearFields = function () {
 };
 
 function checkInput(searchPhrase) {
-    console.log(searchPhrase);
     if (
         searchPhrase == "ED" ||
         searchPhrase == "A AND E" ||
@@ -481,7 +482,6 @@ function checkInput(searchPhrase) {
     ) {
         searchPhrase = "EMERGENCY";
     }
-    console.log(searchPhrase);
     return searchPhrase;
 }
 
