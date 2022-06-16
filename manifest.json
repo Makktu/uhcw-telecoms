@@ -3,8 +3,13 @@
     "name": "Hospital Switchboard",
     "icons": [
         {
-            "src": "./assets/icon.png",
+            "src": "./assets/hospital.png",
             "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "./assets/big-hospital.png",
+            "sizes": "720x",
             "type": "image/png"
         }
     ],
