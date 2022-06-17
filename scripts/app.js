@@ -164,6 +164,8 @@ function numberSearch(searchPhrase) {
                             handler: () => {
                                 console.log("Confirm Okay");
                             },
+                        },
+                        {
                             text: "☎️ CALL",
                             id: "call-button",
                             handler: () => {
