@@ -155,10 +155,24 @@ function numberSearch(searchPhrase) {
             thisArea = nextEntry;
             for (let number in nextEntry) {
                 if (telNums[entry][nextEntry][number] == searchPhrase) {
-                    displayBox(
-                        `✅ Extension ${searchPhrase} is located at ${thisWard}, ${thisArea}`,
-                        searchPhrase
-                    );
+                    alertControl.message = `✅ Extension ${searchPhrase} is located at ${thisWard}, ${thisArea}`;
+                    alertControl.header = `☎️ UHCW Telecoms 🗺️`;
+                    alertControl.buttons = [
+                        {
+                            text: "❌ CLOSE",
+                            id: "ok-button",
+                            handler: () => {
+                                console.log("Confirm Okay");
+                            },
+                            text: "☎️ CALL",
+                            id: "call-button",
+                            handler: () => {
+                                callNumber(searchPhrase);
+                            },
+                        },
+                    ];
+                    document.body.appendChild(alertControl);
+                    alertControl.present();
                     numberToCall = searchPhrase;
                     searchComplete = true;
                     return;
@@ -438,34 +452,6 @@ function displayBox(html, numberToCall) {
     if (phoneSearch) {
         phoneSearch = false;
         displayAllNumbers(allNumbersToCall, promising);
-        //     alertControl.buttons = [
-        //         {
-        //             text: `📲 CALL ${numberToCall} NOW`,
-        //             cssClass: "secondary",
-        //             id: "call-button",
-        //             handler: () => {
-        //                 callNumber(numberToCall);
-        //             },
-        //         },
-        //         {
-        //             text: "📝 CALL OTHER EXTENSION",
-        //             // role: "cancel",
-        //             cssClass: "secondary",
-        //             id: "show-all-button",
-        //             handler: () => {
-        //                 displayAllNumbers(allNumbersToCall, promising);
-        //             },
-        //         },
-        //         {
-        //             text: "❌ CLOSE",
-        //             id: "close-button",
-        //             // handler: () => {
-        //             //     console.log("Confirm Okay");
-        //             // },
-        //         },
-        //     ];
-        //     phoneSearch = false;
-        // }
     }
 }
 
