@@ -163,7 +163,7 @@ function numberSearch(searchPhrase) {
                         {
                             text: "❌ CLOSE",
                             id: "ok-button",
-                            cssClass: "my-custom-class",
+                            // cssClass: "my-custom-class",
                             handler: () => {
                                 console.log("Confirm Okay");
                             },
@@ -420,8 +420,7 @@ function displayBox(html, numberToCall) {
         alertControl.buttons = [
             {
                 text: "OK",
-                id: "ok-button",
-                // handler: () => {
+                id: "ok-button", // handler: () => {
                 //     console.log("Confirm Okay");
                 // },
             },
