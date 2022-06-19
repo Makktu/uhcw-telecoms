@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta http-equiv="refresh" content="900" />
         <meta
             name="google-site-verification"
             content="kQj0bQkISKcfzuAB7botqN8X4zOFxeNYK9_Hb1RqHFI"
@@ -15,12 +16,8 @@
         <!-- STYLES -->
         <style type="text/css">
             :root {
-                /* Set the background of the entire app */
-                --ion-background-color: #e2edff;
-                /* --ion-color: #e5ecec; */
-
-                /* Set the font family of the entire app */
-                /* --ion-font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Roboto', sans-serif; */
+                /* --ion-background-color: #e2edff; */
+                --ion-background-color: #183769;
             }
 
             .ion-padding {
@@ -66,6 +63,18 @@
             ion-icon {
                 font-size: 2rem;
             }
+
+            .my-custom-class .alert-header {
+                background: white;
+            }
+
+            /* .customClass {
+                .alert-wrapper {
+                    .alert-head {
+                        font-size: 3rem;
+                    }
+                }
+            } */
         </style>
 
         <!-- STYLES -->
@@ -166,13 +175,16 @@
                                     </ion-card-header>
                                     <ion-card-content>
                                         <ion-item>
-                                            <ion-label position="floating"
-                                                >Search Ward or Dept.</ion-label
-                                            >
-                                            <ion-input
-                                                type="text"
-                                                id="input-phone"
-                                            ></ion-input>
+                                            <ion-text color="light">
+                                                <ion-label position="floating"
+                                                    >Search Ward or
+                                                    Dept.</ion-label
+                                                >
+                                                <ion-input
+                                                    type="text"
+                                                    id="input-phone"
+                                                ></ion-input>
+                                            </ion-text>
                                         </ion-item>
                                         <div class="ion-text-right">
                                             <ion-button
@@ -211,14 +223,16 @@
                                     </ion-card-header>
                                     <ion-card-content>
                                         <ion-item>
-                                            <ion-label position="floating"
-                                                >Search Dept Name/Room
-                                                Number</ion-label
-                                            >
-                                            <ion-input
-                                                type="text"
-                                                id="input-room"
-                                            ></ion-input>
+                                            <ion-text color="light">
+                                                <ion-label position="floating"
+                                                    >Search Dept Name/Room
+                                                    Number</ion-label
+                                                >
+                                                <ion-input
+                                                    type="text"
+                                                    id="input-room"
+                                                ></ion-input>
+                                            </ion-text>
                                         </ion-item>
                                         <div class="ion-text-right">
                                             <ion-button
@@ -249,24 +263,26 @@
 
                         <ion-col>
                             <div class="ion-text-center">
-                                <a
-                                    href="https://www.figma.com/proto/SSQWbRJUFlf0eBMC2lIVV4/Tutorial?page-id=0%3A1&node-id=0%3A1&viewport=398%2C317%2C1&scaling=scale-down&starting-point-node-id=2%3A5"
-                                    target="_blank"
-                                    >View Final Product Demo</a
-                                >
-                                <br />(opens new browser window)<br />
-                                <ion-text color="dark">
-                                    <h6>
-                                        This app is not an official product<br />of
-                                        ISS or the NHS
-                                    </h6>
-                                </ion-text>
-                                <footer>
-                                    Created by John McNamara
+                                <ion-text color="light">
+                                    <a
+                                        href="https://www.figma.com/proto/SSQWbRJUFlf0eBMC2lIVV4/Tutorial?page-id=0%3A1&node-id=0%3A1&viewport=398%2C317%2C1&scaling=scale-down&starting-point-node-id=2%3A5"
+                                        target="_blank"
+                                        >View Final Product Demo</a
+                                    >
+                                    <br />(opens new browser window)<br />
+                                    <ion-text color="success">
+                                        <h6>
+                                            This app is not an official
+                                            product<br />of ISS or the NHS
+                                        </h6>
+                                    </ion-text>
+                                    <footer>
+                                        Created by John McNamara
 
-                                    <br />enquiries: johnmcna@gmail.com<br /><br />
-                                    Development version 0.8.0
-                                </footer>
+                                        <br />enquiries: johnmcna@gmail.com<br /><br />
+                                        Development version 0.8.5.
+                                    </footer>
+                                </ion-text>
                             </div>
                         </ion-col>
                     </ion-grid>

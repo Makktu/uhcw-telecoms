@@ -156,11 +156,14 @@ function numberSearch(searchPhrase) {
             for (let number in nextEntry) {
                 if (telNums[entry][nextEntry][number] == searchPhrase) {
                     alertControl.message = `✅ Extension ${searchPhrase} is located at ${thisWard}, ${thisArea}`;
-                    alertControl.header = `☎️ UHCW Telecoms 🗺️`;
+                    alertControl.header = `
+                    ☎️ UHCW Telecoms 🗺️`;
+
                     alertControl.buttons = [
                         {
                             text: "❌ CLOSE",
                             id: "ok-button",
+                            cssClass: "my-custom-class",
                             handler: () => {
                                 console.log("Confirm Okay");
                             },
