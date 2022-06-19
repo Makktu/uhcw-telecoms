@@ -291,7 +291,6 @@ function telephoneSearch(searchPhrase) {
                 }
             }
         }
-
         foundWard = [];
         displayBox(message, numberToCall, promising);
     }
