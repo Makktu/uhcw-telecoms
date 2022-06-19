@@ -155,7 +155,7 @@ function numberSearch(searchPhrase) {
             thisArea = nextEntry;
             for (let number in nextEntry) {
                 if (telNums[entry][nextEntry][number] == searchPhrase) {
-                    alertControl.message = `✅ Extension ${searchPhrase} is located at ${thisWard}, ${thisArea}`;
+                    alertControl.message = `<div class="alert-message">✅ Extension ${searchPhrase} is located at ${thisWard}, ${thisArea}</div>`;
                     alertControl.header = `
                     ☎️ UHCW Telecoms 🗺️`;
 
@@ -220,7 +220,7 @@ function telephoneSearch(searchPhrase) {
         searchPhrase = "WARD 11";
     }
     if (searchPhrase.includes("OUT") || searchPhrase.includes("OPD")) {
-        alertControl.message = `<strong>Looking for an Outpatients Clinic?</strong><br><br>Try searching <strong>by its number</strong><br><br>E.g., "OPD 9" or "OPD 3", etc.`;
+        alertControl.message = `<div class="alert-message"><strong>Looking for an Outpatients Clinic?</strong><br><br>Try searching <strong>by its number</strong><br><br>E.g., "OPD 9" or "OPD 3", etc.</div>`;
         alertControl.header = `☎️ UHCW Telecoms 🗺️`;
         alertControl.buttons = [
             {
@@ -244,8 +244,7 @@ function telephoneSearch(searchPhrase) {
     if (foundWard.length == 0) {
         roomSearch = false;
         phoneSearch = false;
-        alertControl.message =
-            "❌ Nothing found. Check spelling and try again.";
+        alertControl.message = `<div class="alert-message">❌ Nothing found. Check spelling and try again.</div>`;
         alertControl.header = `☎️ UHCW Telecoms 🗺️`;
         alertControl.buttons = [
             {
@@ -262,7 +261,7 @@ function telephoneSearch(searchPhrase) {
     }
     if (foundWard) {
         searchPhrase = foundWard[0];
-        message = "";
+        message = "<div class='alert-message'>";
         if (typeof telNums[`${searchPhrase}`] == "object") {
             promising = Object.keys(telNums[`${searchPhrase}`]);
             message += `<div id="phone-results-header"><br><strong>${theWard}</strong></div>`;
@@ -291,6 +290,7 @@ function telephoneSearch(searchPhrase) {
                 }
             }
         }
+        message += "</div>";
         foundWard = [];
         displayBox(message, numberToCall, promising);
     }
@@ -414,7 +414,7 @@ function displayAllNumbers(allNumbersToCall) {
 function displayBox(html, numberToCall) {
     if (!firstUp) {
         firstUp = true;
-        alertControl.message = html;
+        alertControl.message = `<div class="alert-message">${html}</div>`;
         alertControl.header = `☎️ UHCW Telecoms 🗺️`;
         alertControl.buttons = [
             {
