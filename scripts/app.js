@@ -483,6 +483,7 @@ phoneConfirmBtn.addEventListener("click", () => {
 
         if (dataLoaded && searchPhrase) {
             phoneSearch = true;
+            if (msgArea.innerHTML) msgArea.innerHTML = "";
             telephoneSearch(searchPhrase);
         }
     } else {
