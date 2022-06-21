@@ -30,3 +30,10 @@ self.addEventListener("activate", (e) => {
 self.addEventListener("fetch", function (event) {
     console.log("Fetch!", event.request);
 });
+
+self.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible") {
+        console.log("APP resumed");
+        window.location.reload();
+    }
+});

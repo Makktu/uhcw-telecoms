@@ -194,6 +194,9 @@ function telephoneSearch(searchPhrase) {
         return;
     }
     searchPhrase = searchPhrase.toUpperCase();
+    if (searchPhrase == "GCC" || searchPhrase.includes("CRITI")) {
+        searchPhrase = "GENERAL CRITICAL CARE";
+    }
     if (
         searchPhrase == "ED" ||
         searchPhrase == "A AND E" ||
@@ -220,20 +223,16 @@ function telephoneSearch(searchPhrase) {
         searchPhrase = "WARD 11";
     }
     if (searchPhrase.includes("OUT") || searchPhrase.includes("OPD")) {
-        alertControl.message = `<div class="alert-message"><strong>Looking for an Outpatients Clinic?</strong><br><br>Try searching <strong>by its number</strong><br><br>E.g., "OPD 9" or "OPD 3", etc.</div>`;
-        alertControl.header = `☎️ UHCW Telecoms 🗺️`;
-        alertControl.buttons = [
-            {
-                text: "OK",
-                id: "ok-button",
-                // handler: () => {
-                //     console.log("Confirm Okay");
-                // },
-            },
-        ];
-        document.body.appendChild(alertControl);
-        alertControl.present();
-        return;
+        // check if last character(s) of entry is a number
+        // convert to 'clinic' search
+        let lastOneOrTwo = searchPhrase.slice(searchPhrase.length - 2);
+        if (
+            isNaN(+lastOneOrTwo.slice(0, 1)) ||
+            lastOneOrTwo.slice(0, 1) == " "
+        ) {
+            lastOneOrTwo = lastOneOrTwo.slice(1, 2);
+        }
+        searchPhrase = "CLINIC " + lastOneOrTwo;
     }
     for (let entry of topKeys) {
         if (entry.includes(searchPhrase)) {
