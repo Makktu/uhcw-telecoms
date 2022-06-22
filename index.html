@@ -17,11 +17,18 @@
         <style type="text/css">
             :root {
                 /* --ion-background-color: #e2edff; */
-                --ion-background-color: #183769;
+                --ion-background-color: #041229;
                 --ion-text-color: #ffffff;
                 --ion-text-color-rgb: 255, 255, 255;
                 --ion-overlay-background-color: #01060f;
                 --ion-overlay-color: white;
+                --ion-background: url("./assets/the_search.svg");
+            }
+
+            ion-content {
+                background-image: url("./assets/the_search.svg");
+                background-repeat: no-repeat;
+                background-size: 101%;
             }
 
             .alert-message {
@@ -50,7 +57,7 @@
 
             ion-card,
             ion-input {
-                background-color: #3880ff;
+                background-color: #081b3a;
             }
 
             footer {
@@ -169,6 +176,18 @@
                 </ion-header>
                 <!-- HEAD ABOVE, BODY BELOW -->
                 <ion-content>
+                    <ion-accordion-group>
+                        <ion-accordion value="first">
+                          <ion-item slot="header" color="dark">
+                            <ion-label>Check Visiting Times</ion-label>
+                          </ion-item>
+                          <div class="ion-padding" slot="content">
+                            Monday to Friday: 18.30 - 20.00<br>
+                            Saturday & Sunday: 14.00 - 16.00 / 18.30 - 20.00 <br>
+                            Ward 32 currently closed to visiting due to Covid outbreak.<br>
+                            (Last updated: 22 June 2022)
+                          </div>
+                        </ion-accordion>
                     <ion-grid>
                         <!-- <ion-modal id="control-modal"></ion-modal> -->
                         <ion-row>
@@ -274,27 +293,35 @@
                             </ion-col>
                         </ion-row>
                         <div id="all-rooms"></div>
+                        <!-- <img
+                            height="300px"
+                            width="300px"
+                            src="./assets/the_search.svg"
+                        /> -->
 
                         <ion-col>
                             <div class="ion-text-center">
-                                <ion-text color="light">
-                                    <a
-                                        href="https://www.figma.com/proto/SSQWbRJUFlf0eBMC2lIVV4/Tutorial?page-id=0%3A1&node-id=0%3A1&viewport=398%2C317%2C1&scaling=scale-down&starting-point-node-id=2%3A5"
-                                        target="_blank"
-                                        >View Final Product Demo</a
-                                    >
-                                    <br />(opens new browser window)<br />
+                                
                                     <ion-text color="success">
                                         <h6>
                                             This app is not an official
                                             product<br />of ISS or the NHS
                                         </h6>
                                     </ion-text>
-                                    <footer>
-                                        Created by John McNamara
+                                    <ion-accordion-group>
+                                        <ion-accordion value="first">
+                                          <ion-item slot="header" color="dark">
+                                            <ion-label>About This App</ion-label>
+                                          </ion-item>
+                                          <div class="ion-padding" slot="content">
+                                            Created by John McNamara
 
                                         <br />enquiries: johnmcna@gmail.com<br /><br />
-                                        Development version 0.8.6.
+                                        Development version 0.9.0.
+                                          </div>
+                                        </ion-accordion>
+                                    <footer>
+                                        
                                     </footer>
                                 </ion-text>
                             </div>
