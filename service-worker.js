@@ -6,6 +6,7 @@ const staticAssets = [
     // "./node_modules",
     "./assets",
     "./assets/hospital.png",
+    "./assets/Hospital.svg",
     "./assets/big-hospital.png",
     "./index.html",
     "./manifest.json",
