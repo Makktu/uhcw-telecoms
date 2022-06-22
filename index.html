@@ -25,9 +25,9 @@
                 --ion-background: url("./assets/the_search.svg");
             }
 
-            ion-content {
+            /* ion-content {
     --background: url('/assets/the_search.svg') no-repeat 100% 100%;
-}
+} */
 
             .alert-message {
                 color: white;
@@ -55,7 +55,7 @@
 
             ion-card,
             ion-input {
-                background-color: #3880ff;
+                background-color: #112a54;
             }
 
             footer {
@@ -93,6 +93,10 @@
 
             ion-alert {
                 color: white;
+            }
+
+            #disclaimer {
+                color: yellow;
             }
         </style>
 
@@ -166,7 +170,7 @@
         > -->
             <ion-app>
                 <ion-header>
-                    <ion-toolbar color="primary">
+                    <ion-toolbar color="dark">
                         <ion-title style="font-size: 1.25rem"
                             >UHCW Telecoms</ion-title
                         >
@@ -176,7 +180,7 @@
                 <ion-content>
                     <ion-accordion-group>
                         <ion-accordion value="first">
-                          <ion-item slot="header" color="danger">
+                          <ion-item slot="header" color="secondary">
                             <ion-label>Check Visiting Times</ion-label>
                           </ion-item>
                           <div class="ion-padding" slot="content">
@@ -300,15 +304,14 @@
                         <ion-col>
                             <div class="ion-text-center">
                                 
-                                    <ion-text color="success">
-                                        <h6>
+                                    
+                                        <h6 id="disclaimer">
                                             This app is not an official
                                             product<br />of ISS or the NHS
                                         </h6>
-                                    </ion-text>
                                     <ion-accordion-group>
                                         <ion-accordion value="first">
-                                          <ion-item slot="header" color="dark">
+                                          <ion-item slot="header" color="secondary">
                                             <ion-label>About This App</ion-label>
                                           </ion-item>
                                           <div class="ion-padding" slot="content">
