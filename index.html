@@ -26,10 +26,8 @@
             }
 
             ion-content {
-                background-image: url("./assets/the_search.svg");
-                background-repeat: no-repeat;
-                background-size: 101%;
-            }
+    --background: url('/assets/the_search.svg') no-repeat 100% 100%;
+}
 
             .alert-message {
                 color: white;
@@ -57,7 +55,7 @@
 
             ion-card,
             ion-input {
-                background-color: #081b3a;
+                background-color: #3880ff;
             }
 
             footer {
@@ -178,7 +176,7 @@
                 <ion-content>
                     <ion-accordion-group>
                         <ion-accordion value="first">
-                          <ion-item slot="header" color="dark">
+                          <ion-item slot="header" color="danger">
                             <ion-label>Check Visiting Times</ion-label>
                           </ion-item>
                           <div class="ion-padding" slot="content">
@@ -314,9 +312,7 @@
                                             <ion-label>About This App</ion-label>
                                           </ion-item>
                                           <div class="ion-padding" slot="content">
-                                            Created by John McNamara
-
-                                        <br />enquiries: johnmcna@gmail.com<br /><br />
+                                            This app was created as an exercise. It does not use any proprietary data or personal details. Created by John McNamara. Enquiries to:<br> johnmcna@gmail.com<br />
                                         Development version 0.9.0.
                                           </div>
                                         </ion-accordion>
