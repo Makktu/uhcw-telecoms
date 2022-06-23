@@ -22,7 +22,7 @@
                 --ion-text-color-rgb: 255, 255, 255;
                 --ion-overlay-background-color: #01060f;
                 --ion-overlay-color: white;
-                --ion-background: url("./assets/the_search.svg");
+                /* --ion-background: url("./assets/the_search.svg"); */
             }
 
             ion-content {
@@ -46,13 +46,19 @@
 
             .headers {
                 color: white;
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
 
             ion-card,
             ion-input {
                 background-color: #3881ffb3;
             }
+
+            /* #helpdesk {
+                background-color: #1c42838e;
+            } */
+
+
 
             footer {
                 font-size: 75%;
@@ -165,23 +171,26 @@
             <ion-app>
                 <ion-header>
                     <ion-toolbar color="primary">
-                        <ion-title style="font-size: 1.25rem"
+                        <ion-title style="font-size: 1.5rem"
                             >UHCW Telecoms</ion-title
                         >
                     </ion-toolbar>
                 </ion-header>
                 <!-- HEAD ABOVE, BODY BELOW -->
                 <ion-content>
+                    
                     <ion-accordion-group>
                         <ion-accordion value="first">
                           <ion-item slot="header" color="dark">
                             <ion-icon name="enter-sharp"></ion-icon><ion-label> Check Patient Visiting Times</ion-label>
                           </ion-item>
                           <div class="ion-padding" slot="content">
-                            ⏲️ Monday to Friday: 18.30 - 20.00<br>
-                            ⏲️ Saturday & Sunday: 14.00 - 16.00 / 18.30 - 20.00 <br>
-                            ⚠️ Ward 32 currently closed to visiting due to Covid outbreak ⚠️<br>
-                            Last updated: 22 June 2022
+                            <h4 style="color:yellow">Patient Visiting Times at UHCW Walsgrave</h4>
+                            <p style="font-size:80%;">Please note that information is subject to change at short notice.</p>
+                            <p>🕛 Monday to Friday: 18.30 - 20.00</p>
+                            <p>🕛 Saturday & Sunday: 14.00 - 16.00 / 18.30 - 20.00</p>
+                            <p id="visiting-update">❗Ward 32 (all areas): closed to visiting due to Covid outbreak.</p>
+                            <p>Last update: 22 June 2022</p>
                           </div>
                         </ion-accordion>
                     <ion-grid>
@@ -195,10 +204,11 @@
                                             name="call-outline"
                                         ></ion-icon> -->
                                             <div class="headers">
-                                                <ion-icon
-                                                    name="call-outline"
-                                                ></ion-icon>
-                                                Switchboard
+                                                <!-- <ion-icon
+                                                name="call-outline"
+                                            ></ion-icon> -->
+                                               
+                                               <div style="text-align: center;"><div style="font-size: 150%;">☎️</div> Switchboard</div> 
                                             </div>
                                         </ion-card-title>
                                     </ion-card-header>
@@ -239,14 +249,15 @@
                                 </ion-card>
                                 <div id="all-numbers"></div>
 
-                                <ion-card>
+                                <ion-card id="helpdesk">
                                     <ion-card-header>
                                         <ion-card-title>
                                             <div class="headers">
-                                                <ion-icon
+                                                <!-- <ion-icon
                                                     name="locate-outline"
-                                                ></ion-icon>
-                                                Helpdesk
+                                                ></ion-icon>  -->
+                                               
+                                                <div style="text-align: center;"><div style="font-size: 150%;">🔢</div> Helpdesk</div>
                                             </div>
                                         </ion-card-title>
                                     </ion-card-header>
@@ -309,7 +320,7 @@
                                             <ion-icon name="help-sharp"></ion-icon><ion-label> About This App</ion-label>
                                           </ion-item>
                                           <div class="ion-padding" slot="content">
-                                            This app was created as an exercise. It does not use any proprietary data or personal details. Created by John McNamara. Enquiries to:<br> johnmcna@gmail.com<br />
+                                            <p>This app was created for learning purposes and is not intended for public release.</p><p>It does not make use of proprietary data or store any personal details.</p> <p>Created by John McNamara.</p> <p>Enquiries to: johnmcna@gmail.com</p>
                                         Development version 0.9.0.
                                           </div>
                                         </ion-accordion>
