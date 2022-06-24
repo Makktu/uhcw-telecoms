@@ -160,6 +160,10 @@
             "ITU": [26668],
             "HDU": [26670, 26672]
         },
+        "NEONATAL": {
+            "AREA 1": [27339, 26668],
+            "AREA 2": [26667]
+        },
         "MATERNITY RECEPTION": {
             "RECEPTION": [27421, 27422]
         },

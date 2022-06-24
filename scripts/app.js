@@ -430,6 +430,7 @@ function displayBox(html, numberToCall) {
     alertControl.message = html;
 
     if (roomSearch) {
+        alertControl.header = searchPhrase.toUpperCase();
         alertControl.buttons = [
             {
                 text: "SHOW ALL",
